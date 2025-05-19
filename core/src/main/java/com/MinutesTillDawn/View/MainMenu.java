@@ -34,7 +34,7 @@ public class MainMenu implements Screen {
     }
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new ScreenViewport(), Main.getBatch());
         Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);
@@ -74,17 +74,22 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float v) {
-        ScreenUtils.clear(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
+        ScreenUtils.clear(new Color(13f / 255f, 18f / 255f, 37f / 255f, 1f));
+
         Batch batch = Main.getBatch();
         if (GameAssetManager.getGameAssetManager().bwEnabled) {
+            ScreenUtils.clear(Color.BLACK);
             batch.setShader(Main.getMain().grayscaleShader);
         } else {
             batch.setShader(null); // normal rendering
         }
+
         Main.getBatch().begin();
+        // draw any manual stuff here if needed
         Main.getBatch().end();
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
-        stage.draw();
+
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();  // ← will now use the shader!
     }
 
     @Override

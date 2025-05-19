@@ -2,21 +2,30 @@ package com.MinutesTillDawn.View;
 
 import com.MinutesTillDawn.Controller.GameController;
 import com.MinutesTillDawn.Main;
+import com.MinutesTillDawn.Model.GameAssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import java.util.Random;
 
 public class GameScreen  implements Screen, InputProcessor {
     private Stage stage;
     private GameController controller;
+    Array<TextureRegion> forestTiles;
+    Random random = new Random();
+
 
     public GameScreen(GameController controller, Skin skin) {
         this.controller = controller;
+        controller.setView(this);
     }
     @Override
     public boolean keyDown(int i) {
@@ -65,19 +74,30 @@ public class GameScreen  implements Screen, InputProcessor {
 
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(this);
-
+        try {
+            stage = new Stage(new ScreenViewport());
+            Gdx.input.setInputProcessor(this);
+            forestTiles = GameAssetManager.getGameAssetManager().getForestTiles();
+        }
+        catch (Exception e) {
+            System.out.println("2" + e.getMessage());
+        }
     }
 
     @Override
     public void render(float v) {
-        ScreenUtils.clear(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
-        Main.getBatch().begin();
-        controller.updateGame();
-        Main.getBatch().end();
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
-        stage.draw();
+        try {
+            ScreenUtils.clear(new Color(13f / 255f, 18f / 255f, 37f / 255f, 255f / 255f));
+            controller.updateGame();
+            Main.getBatch().begin();
+            controller.renderGame();
+            Main.getBatch().end();
+            stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+            stage.draw();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

@@ -30,48 +30,57 @@ public class LoginMenuController {
         addListeners();
     }
     private void addListeners() {
-        view.loginButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                String username = view.usernameField.getText();
-                String password = view.passwordField.getText();
-                User user = UserDatabase.getDatabase().getUser(username);
-                if (user == null) {
-                    view.error.setColor(Color.RED);
-                    view.error.setText("❌ User does not exist.");
-                }
-                else if (!UserDatabase.getDatabase().validate(username, password)) {
-                    view.error.setColor(Color.RED);
-                    view.error.setText("❌ Incorrect password.");
-                }
-                else {
-                    view.error.setColor(Color.GREEN);
-                    view.error.setText("✅ Login successful!");
-                    UserDatabase.getDatabase().setCurrentUser(new Player(user, false));
-                    new Timer().schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            Main.getMain().setScreen(MainMenu.getMainMenu());
+        {
+            view.loginButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    try {
+                        String username = view.usernameField.getText();
+                        String password = view.passwordField.getText();
+                        User user = UserDatabase.getDatabase().getUser(username);
+                        if (user == null) {
+                            view.error.setColor(Color.RED);
+                            view.error.setText("❌ User does not exist.");
+                        } else if (!UserDatabase.getDatabase().validate(username, password)) {
+                            view.error.setColor(Color.RED);
+                            view.error.setText("❌ Incorrect password.");
+                        } else {
+                            view.error.setColor(Color.GREEN);
+                            view.error.setText("✅ Login successful!");
+                            UserDatabase.getDatabase().setCurrentUser(new Player(user, false));
+                            new Timer().schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    Main.getMain().setScreen(MainMenu.getMainMenu());
+                                }
+                            }, 1);
                         }
-                    }, 1);
+                    }
+                    catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
+            });
 
-            }
-        });
+            view.forgotPasswordButton.addListener(new
 
-        view.forgotPasswordButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Main.getMain().setScreen(ForgotPasswordMenu.getForgotPasswordMenu());
-            }
-        });
+                                                      ClickListener() {
+                                                          @Override
+                                                          public void clicked(InputEvent event, float x, float y) {
+                                                              Main.getMain().setScreen(ForgotPasswordMenu.getForgotPasswordMenu());
+                                                          }
+                                                      });
 
-        view.registerButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Main.getMain().setScreen(RegisterMenu.getRegisterMenu());
-            }
-        });
+            view.registerButton.addListener(new
+
+                                                ClickListener() {
+                                                    @Override
+                                                    public void clicked(InputEvent event, float x, float y) {
+                                                        Main.getMain().setScreen(RegisterMenu.getRegisterMenu());
+                                                    }
+                                                });
+        }
+    }
     }
 
-}
+

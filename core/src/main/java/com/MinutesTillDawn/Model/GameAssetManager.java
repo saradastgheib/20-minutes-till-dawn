@@ -2,37 +2,50 @@ package com.MinutesTillDawn.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameAssetManager {
     private static GameAssetManager gameAssetManager;
     private  Skin skin = new Skin(Gdx.files.internal("skin/pixthulhu-ui.json"));
-    private  Array<String> avatarPaths = new Array<>();
-    Array<Texture> loadedAvatars = new Array<>();
-    public boolean bwEnabled =true;
+    private  Array<String> characterNames = new Array<>();
+    private final HashMap<String, Animation<TextureRegion>> characterIdleAnimations = new HashMap<>();
+    public boolean bwEnabled = false;
+    private final String bullet = "bullet.png";
+    private final String smg = "smg/SMGStill.png";
+    private final Texture smgTexture = new Texture(smg);
 
-    public Texture getTextureForAvatar(String path) {
-        Texture t = new Texture(Gdx.files.internal(path));
-        loadedAvatars.add(t);
-        return t;
-    }
 
-    public void dispose() {
-        for (Texture tex : loadedAvatars) {
-            tex.dispose();
-        }
-    }
+
+
 
     public GameAssetManager () {
-        gameAssetManager = this;
         loadAvatars();
+        loadCharacterIdleAnimation();
+
     }
+
+
+    public Array<TextureRegion> getForestTiles() {
+        Array<TextureRegion> tiles = new Array<>();
+
+        for (int i = 1; i <= 18; i++) {
+            Texture texture = new Texture("tiles/forest" + i + ".png");
+            tiles.add(new TextureRegion(texture));
+        }
+
+        return tiles;
+    }
+
+
     public static GameAssetManager getGameAssetManager(){
         if (gameAssetManager == null)
             gameAssetManager = new GameAssetManager();
@@ -47,20 +60,46 @@ public class GameAssetManager {
     }
 
     public String getRandomAvatarPath() {
-        return avatarPaths.random();
+        return characterNames.random();
     }
     public void loadAvatars() {
-        avatarPaths.add("avatars/T_Abby_Portrait.png");
-        avatarPaths.add("avatars/T_Dasher_Portrait.png");
-        avatarPaths.add("avatars/T_Diamond_Portrait.png");
-        avatarPaths.add("avatars/T_Hastur_Portrait.png");
-        avatarPaths.add("avatars/T_Hina_Portrait.png");
-        avatarPaths.add("avatars/T_Lilith_Portrait.png");
-        avatarPaths.add("avatars/T_Luna_Portrait.png");
-        avatarPaths.add("avatars/T_Raven_Portrait.png");
-        avatarPaths.add("avatars/T_Scarlett_Portrait.png");
-        avatarPaths.add("avatars/T_Shana_Portrait.png");
-        avatarPaths.add("avatars/T_Spark_Portrait.png");
-        avatarPaths.add("avatars/T_Yuki_Portrait.png");
+        characterNames.add("abby");
+        characterNames.add("dasher");
+        characterNames.add("diamond");
+        characterNames.add("hastur");
+        characterNames.add("hina");
+        characterNames.add("lilith");
+        characterNames.add("luna");
+        characterNames.add("raven");
+        characterNames.add("scarlett");
+        characterNames.add("shana");
+        characterNames.add("spark");
+        characterNames.add("yuki");
+    }
+    public void loadCharacterIdleAnimation() {
+        for (String characterName : characterNames){
+            Array<TextureRegion> frames = new Array<>();
+
+            for (int i = 1; i < 6; i++) {
+                String path = "characters/" + characterName + "/idle" + i + ".png";
+                Texture texture = new Texture(Gdx.files.internal(path));
+                TextureRegion region = new TextureRegion(texture);
+                frames.add(region);
+            }
+
+            Animation<TextureRegion> idleAnimation = new Animation<>(0.1f, frames, Animation.PlayMode.LOOP);
+            characterIdleAnimations.put(characterName, idleAnimation);
+        }
+    }
+    public Animation<TextureRegion> getIdleAnimation(String characterFolder) {
+        return characterIdleAnimations.get(characterFolder);
+    }
+
+    public String getSmg() {
+        return smg;
+    }
+
+    public String getBullet() {
+        return bullet;
     }
 }

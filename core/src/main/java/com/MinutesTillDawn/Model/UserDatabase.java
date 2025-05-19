@@ -17,13 +17,12 @@ public class UserDatabase {
     private Player currentPlayer ;
 
     public UserDatabase() {
-        database = this;
         load();
     }
 
     public static UserDatabase getDatabase () {
-        if (database != null) return database;
-        return new UserDatabase();
+        if (database ==null)database = new UserDatabase();
+        return database;
     }
 
 
@@ -88,7 +87,7 @@ public class UserDatabase {
 
     public Player getCurrentUser() {
         if (currentPlayer == null) {
-            return new Player(new User("Sara", "25071980", "avatars/T_Abby_Portrait.png", "meow meow", "mow"), false);
+            return new Player(new User("Sara", "25071980", "abby", "meow meow", "mow"), false);
         }
         return currentPlayer;
     }

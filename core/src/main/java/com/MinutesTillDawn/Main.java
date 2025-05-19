@@ -1,13 +1,11 @@
 package com.MinutesTillDawn;
 
+import com.MinutesTillDawn.Controller.GameController;
 import com.MinutesTillDawn.Controller.LoginMenuController;
 import com.MinutesTillDawn.Controller.MainMenuController;
 import com.MinutesTillDawn.Model.GameAssetManager;
 import com.MinutesTillDawn.Model.MyGame;
-import com.MinutesTillDawn.View.ForgotPasswordMenu;
-import com.MinutesTillDawn.View.LoginMenu;
-import com.MinutesTillDawn.View.MainMenu;
-import com.MinutesTillDawn.View.RegisterMenu;
+import com.MinutesTillDawn.View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -27,19 +25,24 @@ public class Main extends Game {
 
     @Override
     public void create() {
-        main = this;
-        batch = new SpriteBatch();
-        ShaderProgram.pedantic = false;
+        try {
+            main = this;
+            batch = new SpriteBatch();
+            ShaderProgram.pedantic = false;
 
-        grayscaleShader = new ShaderProgram(
-            Gdx.files.internal("shaders/default.vert"),
-            Gdx.files.internal("shaders/grayscale.frag")
-        );
+            grayscaleShader = new ShaderProgram(
+                Gdx.files.internal("shaders/default.vert"),
+                Gdx.files.internal("shaders/grayscale.frag")
+            );
 
-        if (!grayscaleShader.isCompiled()) {
-            System.err.println("Shader compile error: " + grayscaleShader.getLog());
+            if (!grayscaleShader.isCompiled()) {
+                System.err.println("Shader compile error: " + grayscaleShader.getLog());
+            }
+            main.setScreen(new GameScreen(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
         }
-        main.setScreen(MainMenu.getMainMenu());
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 
@@ -51,7 +54,6 @@ public class Main extends Game {
     @Override
     public void dispose() {
         batch.dispose();
-        GameAssetManager.getGameAssetManager().dispose();
     }
 
     public static Main getMain() {
