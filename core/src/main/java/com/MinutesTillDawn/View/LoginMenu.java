@@ -26,16 +26,21 @@ public class LoginMenu implements Screen {
     public Skin skin;
 
     public LoginMenu(LoginMenuController controller, Skin skin) {
-        loginMenu = this;
-        this.skin = skin;
-        this.controller = controller;
-        this.loginButton = new TextButton("Login", skin);
-        this.usernameField = new TextField("", skin);
-        this.passwordField = new TextField("", skin);
-        this.forgotPasswordButton = new TextButton("Forgot password?", skin);
-        this.registerButton = new TextButton("Register", skin);
-        this.error = new Label("", skin);
-        controller.setView(this);
+        try {
+            loginMenu = this;
+            this.skin = skin;
+            this.controller = controller;
+            this.loginButton = new TextButton("Login", skin);
+            this.usernameField = new TextField("", skin);
+            this.passwordField = new TextField("", skin);
+            this.forgotPasswordButton = new TextButton("Forgot password?", skin);
+            this.registerButton = new TextButton("Register", skin);
+            this.error = new Label("", skin);
+            controller.setView(this);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static LoginMenu getLoginMenu() {
@@ -44,65 +49,75 @@ public class LoginMenu implements Screen {
     }
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport(), Main.getBatch());
-        Gdx.input.setInputProcessor(stage);
+        try {
+            stage = new Stage(new ScreenViewport(), Main.getBatch());
+            Gdx.input.setInputProcessor(stage);
 
-        Table table = new Table();
-        table.setFillParent(true);
-        table.center();
-        stage.addActor(table);
-        Label title = new Label("-LOGIN-", skin);
-        title.setFontScale(1.2f);
-        TextField.TextFieldStyle style = usernameField.getStyle();
+            Table table = new Table();
+            table.setFillParent(true);
+            table.center();
+            stage.addActor(table);
+            Label title = new Label("-LOGIN-", skin);
+            title.setFontScale(1.2f);
+            TextField.TextFieldStyle style = usernameField.getStyle();
 
-        style.fontColor = Color.WHITE;
-        style.disabledFontColor = Color.GRAY;
+            style.fontColor = Color.WHITE;
+            style.disabledFontColor = Color.GRAY;
 
-        usernameField.setStyle(style);
-        Drawable background = skin.newDrawable("white", new Color(0.1f, 0.1f, 0.2f, 1f));
-        style.background = background;
+            usernameField.setStyle(style);
+            Drawable background = skin.newDrawable("white", new Color(0.1f, 0.1f, 0.2f, 1f));
+            style.background = background;
 
-        usernameField.setMessageText("Username...");
-        passwordField.setMessageText("Password...");
-        passwordField.setPasswordMode(true);
-        passwordField.setPasswordCharacter('*');
-        error.setColor(Color.RED);
-        setButton(loginButton);
-        setButton(registerButton);
-        setButton(forgotPasswordButton);
-        table.add(title).colspan(2).padBottom(20).padBottom(15).row();
-        Label label = new Label("Username:", skin);
-        label.setColor(new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f));
-        table.add(label).right().padRight(10).padBottom(15);
-        table.add(usernameField).width(200).padBottom(15).row();
+            usernameField.setMessageText("Username...");
+            passwordField.setMessageText("Password...");
+            passwordField.setPasswordMode(true);
+            passwordField.setPasswordCharacter('*');
+            error.setColor(Color.RED);
+            setButton(loginButton);
+            setButton(registerButton);
+            setButton(forgotPasswordButton);
+            table.add(title).colspan(2).padBottom(20).padBottom(15).row();
+            Label label = new Label("Username:", skin);
+            label.setColor(new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f));
+            table.add(label).right().padRight(10).padBottom(15);
+            table.add(usernameField).width(200).padBottom(15).row();
 
-        Label label1 = new Label("Password:", skin);
-        label1.setColor(new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f));
-        table.add(label1).right().padRight(10).padBottom(15);
-        table.add(passwordField).width(200).padBottom(15).row();
-        table.add(loginButton).padTop(10).padBottom(15);
-        table.add(registerButton).padTop(10).padBottom(15).row();
-        table.add(forgotPasswordButton).colspan(2).padTop(10).padBottom(15).row();
-        table.add(error).colspan(2).padTop(10);
+            Label label1 = new Label("Password:", skin);
+            label1.setColor(new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f));
+            table.add(label1).right().padRight(10).padBottom(15);
+            table.add(passwordField).width(200).padBottom(15).row();
+            table.add(loginButton).padTop(10).padBottom(15);
+            table.add(registerButton).padTop(10).padBottom(15).row();
+            table.add(forgotPasswordButton).colspan(2).padTop(10).padBottom(15).row();
+            table.add(error).colspan(2).padTop(10);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void render(float v) {
-        ScreenUtils.clear(new Color(13f / 255f, 18f / 255f, 37f / 255f, 1f));
+        try {
+            ScreenUtils.clear(new Color(13f / 255f, 18f / 255f, 37f / 255f, 1f));
 
-        Batch batch = Main.getBatch();
-        if (GameAssetManager.getGameAssetManager().bwEnabled) {
-            batch.setShader(Main.getMain().grayscaleShader);
-        } else {
-            batch.setShader(null); // normal rendering
+            Batch batch = Main.getBatch();
+            if (GameAssetManager.getGameAssetManager().bwEnabled) {
+                batch.setShader(Main.getMain().grayscaleShader);
+            } else {
+                batch.setShader(null); // normal rendering
+            }
+
+            Main.getBatch().begin();
+            // draw any manual stuff here if needed
+            Main.getBatch().end();
+
+            stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+            stage.draw();
+        }// ← will now use the shader!
+        catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-
-        Main.getBatch().begin();
-        // draw any manual stuff here if needed
-        Main.getBatch().end();
-
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();  // ← will now use the shader!
     }
 
 

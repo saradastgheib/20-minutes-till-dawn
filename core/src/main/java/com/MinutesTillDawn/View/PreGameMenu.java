@@ -8,23 +8,88 @@ import com.MinutesTillDawn.Model.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PreGameMenu implements Screen {
     private static PreGameMenu preGameMenu;
     private Stage stage;
-    public TextButton playButton;
-    private final Label gameTitle;
     public Table table;
+    public ImageButton abby, dasher, diamond, hastur, hina, lilith, luna, raven, scarlett, shana, spark, yuki;
+    public Image largePreview;
+    public Label characterName, weaponName;
+    ImageButton[] characters;
+    public ImageButton revolver, shotgun, dualSMGs;
+    ImageButton[] weapons;
     private final PreGameMenuController controller;
+    public TextButton playButton;
     public PreGameMenu(PreGameMenuController controller, Skin skin) {
         this.controller = controller;
-        this.playButton = new TextButton("play", skin);
-        this.gameTitle = new Label("This is a title", skin);
         this.table = new Table();
+        TextureRegionDrawable abbyIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/abby/idle1.png")));
+        abby = new ImageButton(abbyIcon);
+        abby.setName("abby");
+        TextureRegionDrawable dasherIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/dasher/idle1.png")));
+        dasher = new ImageButton(dasherIcon);
+        dasher.setName("dasher");
+        TextureRegionDrawable diamondIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/diamond/idle1.png")));
+        diamond = new ImageButton(diamondIcon);
+        diamond.setName("diamond");
+        TextureRegionDrawable hasturIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/hastur/idle1.png")));
+        hastur = new ImageButton(hasturIcon);
+        hastur.setName("hastur");
+        TextureRegionDrawable hinaIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/hina/idle1.png")));
+        hina = new ImageButton(hinaIcon);
+        hina.setName("hina");
+        TextureRegionDrawable lilithIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/lilith/idle1.png")));
+        lilith = new ImageButton(lilithIcon);
+        lilith.setName("lilith");
+        TextureRegionDrawable lunaIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/luna/idle1.png")));
+        luna = new ImageButton(lunaIcon);
+        luna.setName("luna");
+        TextureRegionDrawable ravenIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/raven/idle1.png")));
+        raven = new ImageButton(ravenIcon);
+        raven.setName("raven");
+        TextureRegionDrawable scarlettIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/scarlett/idle1.png")));
+        scarlett = new ImageButton(scarlettIcon);
+        scarlett.setName("scarlett");
+        TextureRegionDrawable shanaIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/shana/idle1.png")));
+        shana = new ImageButton(shanaIcon);
+        shana.setName("shana");
+        TextureRegionDrawable sparkIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/spark/idle1.png")));
+        spark = new ImageButton(sparkIcon);
+        spark.setName("spark");
+        TextureRegionDrawable yukiIcon = new TextureRegionDrawable(new TextureRegion(new Texture("characters/yuki/idle1.png")));
+        yuki = new ImageButton(yukiIcon);
+        yuki.setName("yuki");
+        characterName = new Label("", skin);
+        characterName.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
+        characters = new ImageButton[]{abby, dasher, diamond, hastur, hina, lilith, luna, raven, scarlett, shana, spark, yuki};
+        TextureRegionDrawable revolverIcon = new TextureRegionDrawable(new TextureRegion(new Texture("weapons/revolver/still.png")));
+        revolver = new ImageButton(revolverIcon);
+        revolver.setName("revolver");
+        TextureRegionDrawable shotgunIcon = new TextureRegionDrawable(new TextureRegion(new Texture("weapons/shotgun/still.png")));
+        shotgun = new ImageButton(shotgunIcon);
+        shotgun.setName("shotgun");
+        TextureRegionDrawable dualSMGsIcon = new TextureRegionDrawable(new TextureRegion(new Texture("weapons/dualSMGs/still.png")));
+        dualSMGs = new ImageButton(dualSMGsIcon);
+        dualSMGs.setName("dualSMGs");
+        weaponName = new Label("", skin);
+        weaponName.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
+        weapons = new ImageButton[] {revolver, shotgun, dualSMGs};
+        playButton = new TextButton("PLAY", skin);
+        controller.setView(this, characters, weapons);
     }
 
     public static PreGameMenu getPreGameMenu() {
@@ -36,15 +101,53 @@ public class PreGameMenu implements Screen {
     public void show() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+        table.setTouchable(Touchable.enabled);
         table.setFillParent(true);
-        table.center();
-        table.add(gameTitle);
-        table.row().pad(10, 0, 10, 0);
-        table.row().pad(10, 0, 10, 0);
-        table.add(playButton);
-
+        table.top().right();
         stage.addActor(table);
+        largePreview = new Image();
+
+        Table characterIconsTable = new Table();
+        characterIconsTable.top().left();
+
+        for (ImageButton btn : characters) {
+            btn.setSize(btn.getWidth() * 4, btn.getHeight() * 4);
+            btn.getImage().setScaling(Scaling.fill);
+            btn.getImage().setFillParent(true);
+            btn.setTouchable(Touchable.enabled);
+            characterIconsTable.add(btn).size(btn.getWidth(), btn.getHeight()).pad(30);
+        }
+        characterIconsTable.row();
+        table.add(characterIconsTable).colspan(2).padTop(30).top().left();
+        table.row();
+
+        table.add(largePreview).padLeft(10).right();
+        Table rightSide = new Table();
+        characterName.setFontScale(3f);
+        rightSide.add(characterName).left().padRight(100);
+        rightSide.add(largePreview).size(405, 470).padRight(60).padTop(30);
+        rightSide.center().right();
+        table.add(rightSide).expand().right().top();
+        table.row();
+        Table weaponsTable =  new Table();
+        weaponsTable.bottom().left();
+        for (ImageButton btn : weapons) {
+            btn.setSize(btn.getWidth() * 6, btn.getHeight() * 6);
+            btn.getImage().setScaling(Scaling.fill);
+            btn.getImage().setFillParent(true);
+            btn.setTouchable(Touchable.enabled);
+            weaponsTable.add(btn).size(btn.getWidth(), btn.getHeight()).pad(20);
+        }
+        weaponsTable.row();
+        weaponName.setFontScale(2f);
+        table.add(weaponName).padLeft(150).padBottom(30).right();
+        table.row();
+        table.add(weaponsTable).colspan(2).padTop(30).bottom().left();
+        setButton(playButton);
+        playButton.setScale(4f);
+        table.add(playButton).padTop(30).padBottom(50).padRight(40).bottom().right();
     }
+
 
     @Override
     public void render(float v) {
@@ -52,7 +155,7 @@ public class PreGameMenu implements Screen {
         ScreenUtils.clear(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
         Main.getBatch().begin();
         Main.getBatch().end();
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
+        stage.act(v);
         stage.draw();
     }
 
@@ -80,10 +183,6 @@ public class PreGameMenu implements Screen {
     public void dispose() {
 
     }
-    public TextButton getPlayButton() {
-        return playButton;
-    }
-
 
     private void setButton(TextButton button) {
         button.setColor(new Color(13f/255f,18f/255f,37f/255f,255f/255f));

@@ -20,9 +20,7 @@ public class GameAssetManager {
     private final HashMap<String, Animation<TextureRegion>> characterIdleAnimations = new HashMap<>();
     public boolean bwEnabled = false;
     private final String bullet = "bullet.png";
-    private final String smg = "smg/SMGStill.png";
-    private final Texture smgTexture = new Texture(smg);
-
+    private final  Array<TextureRegion> tiles = new Array<>();
 
 
 
@@ -30,17 +28,18 @@ public class GameAssetManager {
     public GameAssetManager () {
         loadAvatars();
         loadCharacterIdleAnimation();
+        initializeTiles();
 
     }
 
 
-    public Array<TextureRegion> getForestTiles() {
-        Array<TextureRegion> tiles = new Array<>();
-
+    public void initializeTiles() {
         for (int i = 1; i <= 18; i++) {
             Texture texture = new Texture("tiles/forest" + i + ".png");
             tiles.add(new TextureRegion(texture));
         }
+    }
+    public Array<TextureRegion> getForestTiles() {
 
         return tiles;
     }
@@ -95,11 +94,11 @@ public class GameAssetManager {
         return characterIdleAnimations.get(characterFolder);
     }
 
-    public String getSmg() {
-        return smg;
-    }
-
     public String getBullet() {
         return bullet;
+    }
+
+    public Array<String> getCharacterNames() {
+        return characterNames;
     }
 }

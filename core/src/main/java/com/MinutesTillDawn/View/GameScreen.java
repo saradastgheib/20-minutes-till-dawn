@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -19,13 +21,16 @@ import java.util.Random;
 public class GameScreen  implements Screen, InputProcessor {
     private Stage stage;
     private GameController controller;
-    Array<TextureRegion> forestTiles;
     Random random = new Random();
+    private OrthographicCamera camera;
 
 
     public GameScreen(GameController controller, Skin skin) {
         this.controller = controller;
         controller.setView(this);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+        camera.update();
     }
     @Override
     public boolean keyDown(int i) {
@@ -74,10 +79,12 @@ public class GameScreen  implements Screen, InputProcessor {
 
     @Override
     public void show() {
-        try {
+        try {System.out.println("GameScreen show called");
+            System.out.println("playerController: " + controller.getPlayerController());
+            System.out.println("worldController: " + controller.getWorldController());
+
             stage = new Stage(new ScreenViewport());
             Gdx.input.setInputProcessor(this);
-            forestTiles = GameAssetManager.getGameAssetManager().getForestTiles();
         }
         catch (Exception e) {
             System.out.println("2" + e.getMessage());
@@ -86,18 +93,20 @@ public class GameScreen  implements Screen, InputProcessor {
 
     @Override
     public void render(float v) {
-        try {
-            ScreenUtils.clear(new Color(13f / 255f, 18f / 255f, 37f / 255f, 255f / 255f));
-            controller.updateGame();
-            Main.getBatch().begin();
-            controller.renderGame();
-            Main.getBatch().end();
-            stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-            stage.draw();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
+        Gdx.gl.glClearColor(0.05f, 0.07f, 0.15f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        Main.getBatch().setProjectionMatrix(camera.combined);
+        Main.getBatch().begin();
+
+        TextureRegion region = GameAssetManager.getGameAssetManager().getForestTiles().get(2);
+        System.out.println("Region: " + region + ", Texture: " + region.getTexture());
+
+        Main.getBatch().draw(region, 100, 100);
+
+        Main.getBatch().end();
+        stage.draw();
     }
 
     @Override

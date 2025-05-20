@@ -10,6 +10,7 @@ public class User {
     private String securityQuestion, securityAnswer;
     private int totalPoints = 0;
 
+
     public User() {}
     public User(String username, String password, String avatar, String securityQuestion, String securityAnswer) {
         this.username = username;

@@ -31,6 +31,7 @@ public class MainMenuController {
                 Main.getMain().setScreen(LoginMenu.getLoginMenu());
             }
         });
+
     }
     public static MainMenuController getController() {
         if (controller == null) controller = new MainMenuController();

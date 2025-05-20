@@ -14,7 +14,7 @@ public class UserDatabase {
     private Array<User> users = new Array<>();
     private final String FILE_NAME = "users.json";
     private Json json = new Json();
-    private Player currentPlayer ;
+    private Player currentPlayer;
 
     public UserDatabase() {
         load();
@@ -87,7 +87,7 @@ public class UserDatabase {
 
     public Player getCurrentUser() {
         if (currentPlayer == null) {
-            return new Player(new User("Sara", "25071980", "abby", "meow meow", "mow"), false);
+            currentPlayer = getGuestPlayer();
         }
         return currentPlayer;
     }

@@ -2,6 +2,7 @@ package com.MinutesTillDawn.Controller;
 
 import com.MinutesTillDawn.Main;
 import com.MinutesTillDawn.Model.Bullet;
+import com.MinutesTillDawn.Model.Player;
 import com.MinutesTillDawn.Model.Weapon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -18,13 +19,22 @@ public class WeaponController {
         this.weapon = weapon;
     }
 
-    public void update(){
-        weapon.getSmgSprite().draw(Main.getBatch());
-        updateBullets();
+    public void update(Player player){
+        Sprite playerSprite = player.getPlayerSprite();
+        Sprite weaponSprite = weapon.getSprite();
+        float weaponX = playerSprite.getX() + playerSprite.getWidth() - 20f; // Right edge
+        float weaponY = playerSprite.getY() + playerSprite.getHeight() / 2f - weaponSprite.getHeight() / 2f- 10f; // Vertical center
+
+        weaponSprite.setPosition(weaponX, weaponY);
+
     }
 
+    public void render() {
+        weapon.getSprite().draw(Main.getBatch());
+        updateBullets();
+    }
     public void handleWeaponRotation(int x, int y) {
-        Sprite weaponSprite = weapon.getSmgSprite();
+        Sprite weaponSprite = weapon.getSprite();
 
         float weaponCenterX = (float) Gdx.graphics.getWidth() / 2;
         float weaponCenterY = (float) Gdx.graphics.getHeight() / 2;

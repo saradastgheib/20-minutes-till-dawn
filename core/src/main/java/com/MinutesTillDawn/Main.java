@@ -3,6 +3,7 @@ package com.MinutesTillDawn;
 import com.MinutesTillDawn.Controller.GameController;
 import com.MinutesTillDawn.Controller.LoginMenuController;
 import com.MinutesTillDawn.Controller.MainMenuController;
+import com.MinutesTillDawn.Controller.PreGameMenuController;
 import com.MinutesTillDawn.Model.GameAssetManager;
 import com.MinutesTillDawn.Model.MyGame;
 import com.MinutesTillDawn.View.*;
@@ -21,7 +22,7 @@ public class Main extends Game {
     private static Main main;
     private static SpriteBatch batch;
     public ShaderProgram grayscaleShader;
-    public static MyGame game;
+    static GameScreen gameScreen;
 
     @Override
     public void create() {
@@ -38,7 +39,8 @@ public class Main extends Game {
             if (!grayscaleShader.isCompiled()) {
                 System.err.println("Shader compile error: " + grayscaleShader.getLog());
             }
-            main.setScreen(new GameScreen(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
+            //main.setScreen(new GameScreen(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
+            main.setScreen(LoginMenu.getLoginMenu());
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
@@ -66,5 +68,9 @@ public class Main extends Game {
 
     public static void setBatch(SpriteBatch batch) {
         Main.batch = batch;
+    }
+
+    public static GameScreen getGame() {
+        return gameScreen;
     }
 }

@@ -26,7 +26,7 @@ public class ForgotPasswordController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 String username = view.usernameField.getText();
-                String password = view.usernameField.getText();
+                String password = view.passwordField.getText();
                 User user = UserDatabase.getDatabase().getUser(username);
                 if (user == null ) {
                     view.error.setColor(Color.RED);

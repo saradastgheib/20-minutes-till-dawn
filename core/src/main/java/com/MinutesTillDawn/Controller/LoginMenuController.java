@@ -6,6 +6,7 @@ import com.MinutesTillDawn.Model.Player;
 import com.MinutesTillDawn.Model.User;
 import com.MinutesTillDawn.Model.UserDatabase;
 import com.MinutesTillDawn.View.*;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -51,7 +52,9 @@ public class LoginMenuController {
                             new Timer().schedule(new TimerTask() {
                                 @Override
                                 public void run() {
-                                    Main.getMain().setScreen(MainMenu.getMainMenu());
+                                    Gdx.app.postRunnable(() -> {
+                                        Main.getMain().setScreen(Main.getGame());
+                                    });
                                 }
                             }, 1);
                         }

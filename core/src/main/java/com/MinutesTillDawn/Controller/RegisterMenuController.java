@@ -9,6 +9,7 @@ import com.MinutesTillDawn.View.LoginMenu;
 import com.MinutesTillDawn.View.MainMenu;
 import com.MinutesTillDawn.View.PreGameMenu;
 import com.MinutesTillDawn.View.RegisterMenu;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -48,15 +49,18 @@ public class RegisterMenuController {
                     view.message.setText("Weak password.");
                 }
                 else {
-                    UserDatabase.getDatabase().register(username,password, GameAssetManager.getGameAssetManager().getRandomAvatarPath(), securityQuestion, securityAnswer);
-                    view.message.setColor(Color.GREEN);
-                    view.message.setText("Registered successfully");
-                    new Timer().schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            Main.getMain().setScreen(LoginMenu.getLoginMenu());
-                        }
-                    }, 1);
+                        UserDatabase.getDatabase().register(username, password, GameAssetManager.getGameAssetManager().getRandomAvatarPath(), securityQuestion, securityAnswer);
+                        view.message.setColor(Color.GREEN);
+                        view.message.setText("Registered successfully");
+
+                        new Timer().schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                Gdx.app.postRunnable(() -> {
+                                    Main.getMain().setScreen(new LoginMenu(LoginMenuController.getController(), GameAssetManager.getGameAssetManager().getSkin()));
+                                });
+                            }
+                        }, 1);
                 }
 
             }

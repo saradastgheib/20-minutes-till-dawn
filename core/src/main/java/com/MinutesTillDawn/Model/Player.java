@@ -16,11 +16,31 @@ public class Player {
     private float time;
     private boolean isPlayerIdle = true;
     private boolean isPlayerRunning = false;
+    public String selectedHero;
+    public String selectedWeapon = "revolver";
 
     public Player(User user, boolean isGuest) {
         this.user = user;
+        System.out.println(user == null);
         this.isGuest = isGuest;
-        playerTexture = new Texture("characters/" + user.getCharacterName() +"/idle1.png");
+        setSelectedHero(user.getCharacterName());
+
+        rect = new CollisionRect(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, playerTexture.getWidth()*2, playerTexture.getHeight()*2);
+        System.out.println(playerTexture);
+        System.out.println(playerSprite);
+        System.out.println(isGuest);
+        System.out.println(user);
+        System.out.println(selectedHero);
+        System.out.println(selectedWeapon);
+    }
+
+    public void setSelectedWeapon(String weaponName) {
+        this.selectedWeapon = weaponName;
+    }
+    public void setSelectedHero(String heroName) {
+        selectedHero = heroName;
+        playerTexture = new Texture("characters/" + heroName +"/idle1.png");
+        System.out.println("set hero to " + heroName);
         playerSprite = new Sprite(playerTexture);
         float screenCenterX = Gdx.graphics.getWidth() / 2f;
         float screenCenterY = Gdx.graphics.getHeight() / 2f;
@@ -28,15 +48,13 @@ public class Player {
         this.posY = screenCenterY;
         playerSprite.setPosition(screenCenterX, screenCenterY);
         playerSprite.setSize(playerTexture.getWidth()*5, playerTexture.getHeight()*5);
-        rect = new CollisionRect(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2, playerTexture.getWidth()*2, playerTexture.getHeight()*2);
     }
-
     public String getAvatarPath() {
         return user.getAvatarPath();
     }
 
     public String getCharacterName() {
-        return user.getCharacterName();
+        return selectedHero;
     }
     public String getUsername () {
         return  user.getUsername();

@@ -1,6 +1,7 @@
 package com.MinutesTillDawn.Controller;
 
 import com.MinutesTillDawn.Main;
+import com.MinutesTillDawn.Model.GameAssetManager;
 import com.MinutesTillDawn.View.ChangeMenu;
 import com.MinutesTillDawn.View.MainMenu;
 import com.MinutesTillDawn.View.PreGameMenu;
@@ -30,7 +31,7 @@ public class ChangeMenuController {
         view.preGame.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Main.getMain().setScreen(PreGameMenu.getPreGameMenu());
+                Main.getMain().setScreen(new PreGameMenu(PreGameMenuController.getController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
         });
     }
