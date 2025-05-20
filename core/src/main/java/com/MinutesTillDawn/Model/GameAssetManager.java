@@ -36,6 +36,7 @@ public class GameAssetManager {
     public void initializeTiles() {
         for (int i = 1; i <= 18; i++) {
             Texture texture = new Texture("tiles/forest" + i + ".png");
+            System.out.println("Creating forest tile texture: forest" + i + ".png, handle: " + texture.getTextureObjectHandle());
             tiles.add(new TextureRegion(texture));
         }
     }

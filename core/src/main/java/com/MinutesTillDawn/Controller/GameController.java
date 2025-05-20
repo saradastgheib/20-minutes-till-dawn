@@ -11,11 +11,11 @@ public class GameController {
     private WeaponController weaponController;
     private WorldController worldController;
     private PlayerController playerController;
-
+    public float timeRemaining;
     public void setView(GameScreen view) {
         this.view = view;
         Player player = UserDatabase.getDatabase().getCurrentUser();
-        System.out.println("set current player : " + player.getUsername());
+        timeRemaining = player.gameTime();
         weaponController = new WeaponController(new Weapon(player.selectedWeapon));
         playerController = new PlayerController(player);
         worldController = new WorldController(playerController);
@@ -23,7 +23,6 @@ public class GameController {
 
     public void updateGame() {
         if (view != null) {
-
             playerController.update();
             weaponController.update(playerController.getPlayer());
         }
@@ -31,8 +30,8 @@ public class GameController {
 
     public void renderGame() {
         worldController.update();
-//        playerController.render();
-//        weaponController.render();
+       playerController.render();
+        weaponController.render();
     }
     public PlayerController getPlayerController() {
         return playerController;

@@ -5,6 +5,7 @@ import com.MinutesTillDawn.Controller.PreGameMenuController;
 import com.MinutesTillDawn.Main;
 import com.MinutesTillDawn.Model.GameAssetManager;
 import com.MinutesTillDawn.Model.Player;
+import com.MinutesTillDawn.Model.UserDatabase;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -28,12 +29,12 @@ public class PreGameMenu implements Screen {
     public Table table;
     public ImageButton abby, dasher, diamond, hastur, hina, lilith, luna, raven, scarlett, shana, spark, yuki;
     public Image largePreview;
-    public Label characterName, weaponName;
+    public Label characterName, weaponName, gameTime;
     ImageButton[] characters;
     public ImageButton revolver, shotgun, dualSMGs;
     ImageButton[] weapons;
     private final PreGameMenuController controller;
-    public TextButton playButton;
+    public TextButton playButton, fiveMinutes, twoMinutes, twentyMinutes;
     public PreGameMenu(PreGameMenuController controller, Skin skin) {
         this.controller = controller;
         this.table = new Table();
@@ -89,6 +90,11 @@ public class PreGameMenu implements Screen {
         weaponName.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
         weapons = new ImageButton[] {revolver, shotgun, dualSMGs};
         playButton = new TextButton("PLAY", skin);
+        fiveMinutes = new TextButton("5 min", skin);
+        twoMinutes = new TextButton("2 min", skin);
+        twentyMinutes = new TextButton("20 min", skin);
+        gameTime = new Label("", skin);
+        gameTime.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
         controller.setView(this, characters, weapons);
     }
 
@@ -106,7 +112,7 @@ public class PreGameMenu implements Screen {
         table.top().right();
         stage.addActor(table);
         largePreview = new Image();
-
+        largePreview.setDrawable(new TextureRegionDrawable(new Texture("characters/" + UserDatabase.getDatabase().getCurrentUser().getCharacterName() + "/avatar.png")));
         Table characterIconsTable = new Table();
         characterIconsTable.top().left();
 
@@ -120,10 +126,19 @@ public class PreGameMenu implements Screen {
         characterIconsTable.row();
         table.add(characterIconsTable).colspan(2).padTop(30).top().left();
         table.row();
-
+//        Table timeButtonsTable = new Table();
+        twoMinutes.setSize(100, 100);
+        fiveMinutes.setSize(100, 100);
+        twentyMinutes.setSize(100, 100);
+//
+//        timeButtonsTable.add(twoMinutes).padRight(20);
+//        timeButtonsTable.add(fiveMinutes).padRight(20);
+//        timeButtonsTable.add(twentyMinutes);
+//        table.add(timeButtonsTable).left();
         table.add(largePreview).padLeft(10).right();
         Table rightSide = new Table();
         characterName.setFontScale(3f);
+        characterName.setText(UserDatabase.getDatabase().getCurrentUser().getCharacterName());
         rightSide.add(characterName).left().padRight(100);
         rightSide.add(largePreview).size(405, 470).padRight(60).padTop(30);
         rightSide.center().right();
@@ -138,14 +153,24 @@ public class PreGameMenu implements Screen {
             btn.setTouchable(Touchable.enabled);
             weaponsTable.add(btn).size(btn.getWidth(), btn.getHeight()).pad(20);
         }
+        weaponsTable.add(twoMinutes).pad(30).padLeft(200).padBottom(100);
+        weaponsTable.add(fiveMinutes).pad(30).padBottom(100);
+        weaponsTable.add(twentyMinutes).pad(30).padBottom(100);
         weaponsTable.row();
         weaponName.setFontScale(2f);
-        table.add(weaponName).padLeft(150).padBottom(30).right();
+        weaponName.setText(UserDatabase.getDatabase().getCurrentUser().selectedWeapon);
+        table.add(weaponName).padLeft(80).padBottom(30).right();
+        gameTime.setFontScale(2f);
+        gameTime.setText("game duration : 5 minutes");
+        table.add(gameTime).padLeft(20).padBottom(30);
         table.row();
         table.add(weaponsTable).colspan(2).padTop(30).bottom().left();
+
+
+        setButton(twoMinutes); setButton(fiveMinutes); setButton(twentyMinutes);
         setButton(playButton);
         playButton.setScale(4f);
-        table.add(playButton).padTop(30).padBottom(50).padRight(40).bottom().right();
+        table.add(playButton).padTop(30).padBottom(100).bottom();
     }
 
 

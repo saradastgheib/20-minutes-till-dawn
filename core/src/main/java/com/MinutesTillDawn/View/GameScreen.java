@@ -9,6 +9,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -22,15 +23,11 @@ public class GameScreen  implements Screen, InputProcessor {
     private Stage stage;
     private GameController controller;
     Random random = new Random();
-    private OrthographicCamera camera;
-
 
     public GameScreen(GameController controller, Skin skin) {
         this.controller = controller;
         controller.setView(this);
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        camera.update();
+
     }
     @Override
     public boolean keyDown(int i) {
@@ -94,16 +91,18 @@ public class GameScreen  implements Screen, InputProcessor {
     @Override
     public void render(float v) {
 
-        Gdx.gl.glClearColor(0.05f, 0.07f, 0.15f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        Main.getBatch().setProjectionMatrix(camera.combined);
+        Main.getBatch().setColor(1, 1, 1, 1);
+        if (controller.timeRemaining > 0 ) {
+            controller.timeRemaining -= v;
+        }
+        else {
+            controller.timeRemaining = 0;
+            //endGame()
+        }
+        controller.updateGame();
         Main.getBatch().begin();
 
-        TextureRegion region = GameAssetManager.getGameAssetManager().getForestTiles().get(2);
-        System.out.println("Region: " + region + ", Texture: " + region.getTexture());
-
-        Main.getBatch().draw(region, 100, 100);
+        controller.renderGame();
 
         Main.getBatch().end();
         stage.draw();

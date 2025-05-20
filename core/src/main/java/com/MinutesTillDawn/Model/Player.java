@@ -18,6 +18,7 @@ public class Player {
     private boolean isPlayerRunning = false;
     public String selectedHero;
     public String selectedWeapon = "revolver";
+    public float gameTime = 2.5f * 60f;
 
     public Player(User user, boolean isGuest) {
         this.user = user;
@@ -40,14 +41,13 @@ public class Player {
     public void setSelectedHero(String heroName) {
         selectedHero = heroName;
         playerTexture = new Texture("characters/" + heroName +"/idle1.png");
-        System.out.println("set hero to " + heroName);
         playerSprite = new Sprite(playerTexture);
         float screenCenterX = Gdx.graphics.getWidth() / 2f;
         float screenCenterY = Gdx.graphics.getHeight() / 2f;
         this.posX = screenCenterX;
         this.posY = screenCenterY;
         playerSprite.setPosition(screenCenterX, screenCenterY);
-        playerSprite.setSize(playerTexture.getWidth()*5, playerTexture.getHeight()*5);
+        playerSprite.setSize(playerTexture.getWidth()*3.5f, playerTexture.getHeight()*3.5f);
     }
     public String getAvatarPath() {
         return user.getAvatarPath();
@@ -109,5 +109,9 @@ public class Player {
 
     public void setPlayerRunning(boolean playerRunning) {
         isPlayerRunning = playerRunning;
+    }
+
+    public float gameTime() {
+        return gameTime;
     }
 }

@@ -53,7 +53,7 @@ public class LoginMenuController {
                                 @Override
                                 public void run() {
                                     Gdx.app.postRunnable(() -> {
-                                        Main.getMain().setScreen(Main.getGame());
+                                        Main.getMain().setScreen(new MainMenu(MainMenuController.getController(), GameAssetManager.getGameAssetManager().getSkin()));
                                     });
                                 }
                             }, 1);
