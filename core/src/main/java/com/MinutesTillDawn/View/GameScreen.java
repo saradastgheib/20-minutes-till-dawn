@@ -3,7 +3,9 @@ package com.MinutesTillDawn.View;
 import com.MinutesTillDawn.Controller.GameController;
 import com.MinutesTillDawn.Main;
 import com.MinutesTillDawn.Model.GameAssetManager;
+import com.MinutesTillDawn.Model.Player;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -31,6 +33,26 @@ public class GameScreen  implements Screen, InputProcessor {
     }
     @Override
     public boolean keyDown(int i) {
+        switch (i) {
+            case Input.Keys.L:
+                controller.getPlayerController().getPlayer().upgradeLevel();
+                break;
+            case Input.Keys.R:
+                controller.timeRemaining -= 60;
+                break;
+            case Input.Keys.H:
+                Player player = controller.getPlayerController().getPlayer();
+                if (player.getHealthPoints() == 1) {
+                    player.adjustHP(1);
+                }
+                break;
+            case Input.Keys.B:
+                //bossFight();
+                break;
+            case Input.Keys.F:
+                //freezeEnemies();
+                break;
+        }
         return false;
     }
 
@@ -76,10 +98,7 @@ public class GameScreen  implements Screen, InputProcessor {
 
     @Override
     public void show() {
-        try {System.out.println("GameScreen show called");
-            System.out.println("playerController: " + controller.getPlayerController());
-            System.out.println("worldController: " + controller.getWorldController());
-
+        try {
             stage = new Stage(new ScreenViewport());
             Gdx.input.setInputProcessor(this);
         }

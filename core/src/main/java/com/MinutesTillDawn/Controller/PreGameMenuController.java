@@ -61,6 +61,27 @@ public class PreGameMenuController {
                 Main.getMain().setScreen(new GameScreen(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
         });
+        view.twoMinutes.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                UserDatabase.getDatabase().getCurrentUser().setGameTime(2);
+                view.gameTime.setText("game duration : 2 minutes");
+            }
+        });
+        view.fiveMinutes.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                UserDatabase.getDatabase().getCurrentUser().setGameTime(5);
+                view.gameTime.setText("game duration : 5 minutes");
+            }
+        });
+        view.twentyMinutes.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                UserDatabase.getDatabase().getCurrentUser().setGameTime(20);
+                view.gameTime.setText("game duration : 20 minutes");
+            }
+        });
     }
 }
 

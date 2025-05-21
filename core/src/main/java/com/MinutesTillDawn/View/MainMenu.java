@@ -81,15 +81,14 @@ public class MainMenu implements Screen {
             ScreenUtils.clear(Color.BLACK);
             batch.setShader(Main.getMain().grayscaleShader);
         } else {
-            batch.setShader(null); // normal rendering
+            batch.setShader(null);
         }
 
         Main.getBatch().begin();
-        // draw any manual stuff here if needed
         Main.getBatch().end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();  // ← will now use the shader!
+        stage.draw();
     }
 
     @Override

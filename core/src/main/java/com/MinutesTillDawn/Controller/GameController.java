@@ -15,7 +15,7 @@ public class GameController {
     public void setView(GameScreen view) {
         this.view = view;
         Player player = UserDatabase.getDatabase().getCurrentUser();
-        timeRemaining = player.gameTime();
+        timeRemaining = player.gameTime() * 60f;
         weaponController = new WeaponController(new Weapon(player.selectedWeapon));
         playerController = new PlayerController(player);
         worldController = new WorldController(playerController);

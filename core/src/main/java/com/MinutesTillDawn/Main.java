@@ -5,6 +5,7 @@ import com.MinutesTillDawn.Controller.LoginMenuController;
 import com.MinutesTillDawn.Controller.MainMenuController;
 import com.MinutesTillDawn.Controller.PreGameMenuController;
 import com.MinutesTillDawn.Model.GameAssetManager;
+import com.MinutesTillDawn.Model.GameSettings;
 import com.MinutesTillDawn.Model.MyGame;
 import com.MinutesTillDawn.View.*;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -39,7 +40,8 @@ public class Main extends Game {
             if (!grayscaleShader.isCompiled()) {
                 System.err.println("Shader compile error: " + grayscaleShader.getLog());
             }
-            //main.setScreen(new GameScreen(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
+            GameSettings.getCurrentMusic().setLooping(true);
+            GameSettings.getCurrentMusic().play();
             main.setScreen(LoginMenu.getLoginMenu());
         }
         catch (Exception e) {

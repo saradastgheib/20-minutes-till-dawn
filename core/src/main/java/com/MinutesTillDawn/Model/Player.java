@@ -9,8 +9,8 @@ public class Player {
     private Sprite playerSprite;
     public boolean isGuest;
     private User user;
-    private int pointsInThisGame = 0;
-    private float speed = 5, health =100;
+    private int pointsInThisGame = 0, healthPoints = 5; //TODO initialize this
+    private float speed = 5;
     private float posX = 0, posY = 0;
     private CollisionRect rect;
     private float time;
@@ -18,21 +18,16 @@ public class Player {
     private boolean isPlayerRunning = false;
     public String selectedHero;
     public String selectedWeapon = "revolver";
-    public float gameTime = 2.5f * 60f;
+    private GameSettings settings = new GameSettings();
+
+    private int xp = 0, level = 1;
 
     public Player(User user, boolean isGuest) {
         this.user = user;
-        System.out.println(user == null);
         this.isGuest = isGuest;
         setSelectedHero(user.getCharacterName());
 
         rect = new CollisionRect(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, playerTexture.getWidth()*2, playerTexture.getHeight()*2);
-        System.out.println(playerTexture);
-        System.out.println(playerSprite);
-        System.out.println(isGuest);
-        System.out.println(user);
-        System.out.println(selectedHero);
-        System.out.println(selectedWeapon);
     }
 
     public void setSelectedWeapon(String weaponName) {
@@ -111,7 +106,32 @@ public class Player {
         isPlayerRunning = playerRunning;
     }
 
-    public float gameTime() {
-        return gameTime;
+    public int gameTime() {
+        return settings.gameTime;
+    }
+    public void setGameTime(int time) {
+        settings.gameTime = time;
+    }
+    public void addXP(int xp) {
+        this.xp += xp;
+
+        while (this.xp >= getXpNeeded()) {
+            this.xp -= getXpNeeded();
+            upgradeLevel();
+        }
+    }
+
+    public  void upgradeLevel() {
+        level ++;
+    }
+    public int getXpNeeded(){
+        return  level * 20;
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+    public void adjustHP(int amount) {
+        healthPoints += amount;
     }
 }
