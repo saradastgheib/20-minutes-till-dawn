@@ -30,11 +30,11 @@ public class LoginMenu implements Screen {
             loginMenu = this;
             this.skin = skin;
             this.controller = controller;
-            this.loginButton = new TextButton("Login", skin);
+            this.loginButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.LOGINMENU.getText(), skin);
             this.usernameField = new TextField("", skin);
             this.passwordField = new TextField("", skin);
-            this.forgotPasswordButton = new TextButton("Forgot password?", skin);
-            this.registerButton = new TextButton("Register", skin);
+            this.forgotPasswordButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.FORGOTYOURPASSWORD.getText(), skin);
+            this.registerButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.REISTERMENU.getText(), skin);
             this.error = new Label("", skin);
             controller.setView(this);
         }
@@ -57,7 +57,7 @@ public class LoginMenu implements Screen {
             table.setFillParent(true);
             table.center();
             stage.addActor(table);
-            Label title = new Label("-LOGIN-", skin);
+            Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.LOGINLABEL.getText(), skin);
             title.setFontScale(1.2f);
             TextField.TextFieldStyle style = usernameField.getStyle();
 
@@ -68,8 +68,8 @@ public class LoginMenu implements Screen {
             Drawable background = skin.newDrawable("white", new Color(0.1f, 0.1f, 0.2f, 1f));
             style.background = background;
 
-            usernameField.setMessageText("Username...");
-            passwordField.setMessageText("Password...");
+            usernameField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.USERNAMEFIELDPLACEHOLDER.getText());
+            passwordField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.PASSWORDFIELDPLACEHOLDER.getText());
             passwordField.setPasswordMode(true);
             passwordField.setPasswordCharacter('*');
             error.setColor(Color.RED);
@@ -77,12 +77,12 @@ public class LoginMenu implements Screen {
             setButton(registerButton);
             setButton(forgotPasswordButton);
             table.add(title).colspan(2).padBottom(20).padBottom(15).row();
-            Label label = new Label("Username:", skin);
+            Label label = new Label(com.MinutesTillDawn.Model.Enums.Label.USERNAMEFIELD.getText(), skin);
             label.setColor(new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f));
             table.add(label).right().padRight(10).padBottom(15);
             table.add(usernameField).width(200).padBottom(15).row();
 
-            Label label1 = new Label("Password:", skin);
+            Label label1 = new Label(com.MinutesTillDawn.Model.Enums.Label.PASSWORDFIELD.getText(), skin);
             label1.setColor(new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f));
             table.add(label1).right().padRight(10).padBottom(15);
             table.add(passwordField).width(200).padBottom(15).row();
@@ -105,16 +105,15 @@ public class LoginMenu implements Screen {
             if (GameAssetManager.getGameAssetManager().bwEnabled) {
                 batch.setShader(Main.getMain().grayscaleShader);
             } else {
-                batch.setShader(null); // normal rendering
+                batch.setShader(null);
             }
 
             Main.getBatch().begin();
-            // draw any manual stuff here if needed
             Main.getBatch().end();
 
             stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
             stage.draw();
-        }// ← will now use the shader!
+        }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }

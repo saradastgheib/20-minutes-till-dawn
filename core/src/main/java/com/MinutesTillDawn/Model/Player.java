@@ -1,8 +1,12 @@
 package com.MinutesTillDawn.Model;
 
+import com.MinutesTillDawn.Model.Enums.Ability;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
     private Texture playerTexture;
@@ -18,7 +22,7 @@ public class Player {
     private boolean isPlayerRunning = false;
     public String selectedHero;
     public String selectedWeapon = "revolver";
-    private GameSettings settings = new GameSettings();
+    private List<Ability> retrievedAbilities = new ArrayList<>();
 
     private int xp = 0, level = 1;
 
@@ -106,12 +110,6 @@ public class Player {
         isPlayerRunning = playerRunning;
     }
 
-    public int gameTime() {
-        return settings.gameTime;
-    }
-    public void setGameTime(int time) {
-        settings.gameTime = time;
-    }
     public void addXP(int xp) {
         this.xp += xp;
 
@@ -134,4 +132,14 @@ public class Player {
     public void adjustHP(int amount) {
         healthPoints += amount;
     }
+
+    public List<Ability> getRetrievedAbilities() {
+        return retrievedAbilities;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+
 }

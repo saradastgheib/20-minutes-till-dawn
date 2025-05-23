@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -51,6 +52,9 @@ public class GameScreen  implements Screen, InputProcessor {
                 break;
             case Input.Keys.F:
                 //freezeEnemies();
+                break;
+            case Input.Keys.P:
+                Main.getMain().setScreen(new PauseMenu(this));
                 break;
         }
         return false;
@@ -99,7 +103,7 @@ public class GameScreen  implements Screen, InputProcessor {
     @Override
     public void show() {
         try {
-            stage = new Stage(new ScreenViewport());
+            stage = new Stage(new ScreenViewport(), Main.getBatch());
             Gdx.input.setInputProcessor(this);
         }
         catch (Exception e) {
@@ -110,21 +114,31 @@ public class GameScreen  implements Screen, InputProcessor {
     @Override
     public void render(float v) {
 
-        Main.getBatch().setColor(1, 1, 1, 1);
-        if (controller.timeRemaining > 0 ) {
-            controller.timeRemaining -= v;
-        }
-        else {
-            controller.timeRemaining = 0;
-            //endGame()
-        }
-        controller.updateGame();
-        Main.getBatch().begin();
+        try {
+            Main.getBatch().setColor(1, 1, 1, 1);
+            Batch batch = Main.getBatch();
+            if (GameAssetManager.getGameAssetManager().bwEnabled) {
+                batch.setShader(Main.getMain().grayscaleShader);
+            } else {
+                batch.setShader(null);
+            }
+            if (controller.timeRemaining > 0) {
+                controller.timeRemaining -= v;
+            } else {
+                controller.timeRemaining = 0;
+                //endGame()
+            }
+            controller.updateGame();
+            Main.getBatch().begin();
 
-        controller.renderGame();
+            controller.renderGame();
 
-        Main.getBatch().end();
-        stage.draw();
+            Main.getBatch().end();
+            stage.draw();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -150,5 +164,9 @@ public class GameScreen  implements Screen, InputProcessor {
     @Override
     public void dispose() {
 
+    }
+
+    public GameController getController() {
+        return controller;
     }
 }

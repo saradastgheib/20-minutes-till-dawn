@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import java.sql.SQLException;
+
 public class ForgotPasswordController {
     private static ForgotPasswordController controller;
     private ForgotPasswordMenu view;
@@ -27,7 +29,8 @@ public class ForgotPasswordController {
             public void clicked(InputEvent event, float x, float y) {
                 String username = view.usernameField.getText();
                 String password = view.passwordField.getText();
-                User user = UserDatabase.getDatabase().getUser(username);
+                User user = null;
+                user = UserDatabase.getDatabase().getUser(username);
                 if (user == null ) {
                     view.error.setColor(Color.RED);
                     view.error.setText("User doesn't exist");

@@ -31,9 +31,9 @@ public class RegisterMenu implements Screen {
         usernameField = new TextField("", skin);
         passwordField = new TextField("", skin);
         securityQuestionField = new TextField("", skin);
-        registerButton = new TextButton("Register", skin);
-        guestButton = new TextButton("Play as guest", skin);
-        backButton = new TextButton("Back", skin);
+        registerButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.REISTERMENU.getText(), skin);
+        guestButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.PLAYASGUEST.getText(), skin);
+        backButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.BACK.getText(), skin);
         message = new Label("", skin);
         registerMenu = this;
         controller.setView(this);
@@ -54,11 +54,11 @@ public class RegisterMenu implements Screen {
         table.center();
         stage.addActor(table);
 
-        Label title = new Label("Register Menu", skin);
+        Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.REISTERMENU.getText() +" menu", skin);
         title.setFontScale(1.2f);
 
-        usernameField.setMessageText("Enter your username");
-        passwordField.setMessageText("Enter your password");
+        usernameField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURUSERNAME.getText());
+        passwordField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURPASSWORD.getText());
         passwordField.setPasswordMode(true);
         passwordField.setPasswordCharacter('*');
 
@@ -74,7 +74,7 @@ public class RegisterMenu implements Screen {
         );
         securityQuestionBox.setColor(13f/255f,18f/255f,37f/255f,255f/255f);
         securityQuestionBox.getStyle().fontColor = new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f);
-        securityQuestionField.setMessageText("Answer to security question");
+        securityQuestionField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ANSWERLABEL.getText());
 
         message.setWrap(true);
         message.setAlignment(Align.center);

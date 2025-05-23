@@ -9,16 +9,20 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.Array;
 
+import java.sql.*;
+
 public class UserDatabase {
     private static UserDatabase database;
     private Array<User> users = new Array<>();
     private final String FILE_NAME = "users.json";
     private Json json = new Json();
     private Player currentPlayer;
+    private Connection connection;
 
     public UserDatabase() {
         load();
     }
+
 
     public static UserDatabase getDatabase () {
         if (database ==null)database = new UserDatabase();

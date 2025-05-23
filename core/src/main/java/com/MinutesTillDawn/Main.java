@@ -7,6 +7,7 @@ import com.MinutesTillDawn.Controller.PreGameMenuController;
 import com.MinutesTillDawn.Model.GameAssetManager;
 import com.MinutesTillDawn.Model.GameSettings;
 import com.MinutesTillDawn.Model.MyGame;
+import com.MinutesTillDawn.Model.UserDatabase;
 import com.MinutesTillDawn.View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
@@ -31,7 +32,6 @@ public class Main extends Game {
             main = this;
             batch = new SpriteBatch();
             ShaderProgram.pedantic = false;
-
             grayscaleShader = new ShaderProgram(
                 Gdx.files.internal("shaders/default.vert"),
                 Gdx.files.internal("shaders/grayscale.frag")
@@ -42,7 +42,7 @@ public class Main extends Game {
             }
             GameSettings.getCurrentMusic().setLooping(true);
             GameSettings.getCurrentMusic().play();
-            main.setScreen(LoginMenu.getLoginMenu());
+            main.setScreen(new PauseMenu(new GameScreen(new GameController(), GameAssetManager.getGameAssetManager().getSkin())));
         }
         catch (Exception e) {
             System.err.println(e.getMessage());

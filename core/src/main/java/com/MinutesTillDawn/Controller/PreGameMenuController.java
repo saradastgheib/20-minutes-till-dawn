@@ -1,10 +1,7 @@
 package com.MinutesTillDawn.Controller;
 
 import com.MinutesTillDawn.Main;
-import com.MinutesTillDawn.Model.GameAssetManager;
-import com.MinutesTillDawn.Model.Player;
-import com.MinutesTillDawn.Model.User;
-import com.MinutesTillDawn.Model.UserDatabase;
+import com.MinutesTillDawn.Model.*;
 import com.MinutesTillDawn.View.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -64,21 +61,21 @@ public class PreGameMenuController {
         view.twoMinutes.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                UserDatabase.getDatabase().getCurrentUser().setGameTime(2);
+                GameSettings.gameTime = 2;
                 view.gameTime.setText("game duration : 2 minutes");
             }
         });
         view.fiveMinutes.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                UserDatabase.getDatabase().getCurrentUser().setGameTime(5);
+                GameSettings.gameTime = 5;
                 view.gameTime.setText("game duration : 5 minutes");
             }
         });
         view.twentyMinutes.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                UserDatabase.getDatabase().getCurrentUser().setGameTime(20);
+                GameSettings.gameTime = 20;
                 view.gameTime.setText("game duration : 20 minutes");
             }
         });

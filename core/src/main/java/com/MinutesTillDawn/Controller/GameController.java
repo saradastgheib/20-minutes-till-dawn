@@ -1,9 +1,6 @@
 package com.MinutesTillDawn.Controller;
 
-import com.MinutesTillDawn.Model.Player;
-import com.MinutesTillDawn.Model.User;
-import com.MinutesTillDawn.Model.UserDatabase;
-import com.MinutesTillDawn.Model.Weapon;
+import com.MinutesTillDawn.Model.*;
 import com.MinutesTillDawn.View.GameScreen;
 
 public class GameController {
@@ -14,8 +11,9 @@ public class GameController {
     public float timeRemaining;
     public void setView(GameScreen view) {
         this.view = view;
-        Player player = UserDatabase.getDatabase().getCurrentUser();
-        timeRemaining = player.gameTime() * 60f;
+        Player orgPlayer = UserDatabase.getDatabase().getCurrentUser();
+        Player player = new Player(orgPlayer.getUser(), orgPlayer.isGuest);
+        timeRemaining = GameSettings.gameTime * 60f;
         weaponController = new WeaponController(new Weapon(player.selectedWeapon));
         playerController = new PlayerController(player);
         worldController = new WorldController(playerController);

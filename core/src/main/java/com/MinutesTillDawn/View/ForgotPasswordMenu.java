@@ -6,7 +6,7 @@ import com.MinutesTillDawn.Model.GameAssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -28,9 +28,9 @@ public class ForgotPasswordMenu implements Screen {
         this.controller = controller;
         this.passwordField = new TextField("", skin);
         this.usernameField = new TextField("", skin);
-        this.resetPasswordButton = new TextButton("Reset password!", skin);
+        this.resetPasswordButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.RESETPASSWORD.getText(), skin);
         this.error = new Label("", skin);
-        this.backButton = new TextButton("Back to Login", skin);
+        this.backButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.BACK.getText(), skin);
         controller.setView(this);
     }
 
@@ -40,18 +40,18 @@ public class ForgotPasswordMenu implements Screen {
     }
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new ScreenViewport(), Main.getBatch());
         Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
         table.setFillParent(true);
         table.center();
         stage.addActor(table);
-        Label title = new Label("Forgot Your Password?", skin);
+        Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.FORGOTYOURPASSWORD.getText(), skin);
         title.setFontScale(1.2f);
 
-        usernameField.setMessageText("Enter your username.");
-        passwordField.setMessageText("Enter your new password.");
+        usernameField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURUSERNAME.getText());
+        passwordField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURPASSWORD.getText());
         passwordField.setPasswordMode(true);
         passwordField.setPasswordCharacter('*');
         error.setColor(Color.RED);
@@ -74,6 +74,13 @@ public class ForgotPasswordMenu implements Screen {
     public void render(float v) {
 
         ScreenUtils.clear(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
+        Batch batch = Main.getBatch();
+        if (GameAssetManager.getGameAssetManager().bwEnabled) {
+            ScreenUtils.clear(Color.BLACK);
+            batch.setShader(Main.getMain().grayscaleShader);
+        } else {
+            batch.setShader(null);
+        }
         Main.getBatch().begin();
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));

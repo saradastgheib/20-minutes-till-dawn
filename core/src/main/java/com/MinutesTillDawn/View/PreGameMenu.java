@@ -4,12 +4,14 @@ import com.MinutesTillDawn.Controller.MainMenuController;
 import com.MinutesTillDawn.Controller.PreGameMenuController;
 import com.MinutesTillDawn.Main;
 import com.MinutesTillDawn.Model.GameAssetManager;
+import com.MinutesTillDawn.Model.GameSettings;
 import com.MinutesTillDawn.Model.Player;
 import com.MinutesTillDawn.Model.UserDatabase;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -89,7 +91,7 @@ public class PreGameMenu implements Screen {
         weaponName = new Label("", skin);
         weaponName.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
         weapons = new ImageButton[] {revolver, shotgun, dualSMGs};
-        playButton = new TextButton("PLAY", skin);
+        playButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.PLAY.getText(), skin);
         fiveMinutes = new TextButton("5 min", skin);
         twoMinutes = new TextButton("2 min", skin);
         twentyMinutes = new TextButton("20 min", skin);
@@ -105,7 +107,7 @@ public class PreGameMenu implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new ScreenViewport(), Main.getBatch());
         Gdx.input.setInputProcessor(stage);
         table.setTouchable(Touchable.enabled);
         table.setFillParent(true);
@@ -130,11 +132,7 @@ public class PreGameMenu implements Screen {
         twoMinutes.setSize(100, 100);
         fiveMinutes.setSize(100, 100);
         twentyMinutes.setSize(100, 100);
-//
-//        timeButtonsTable.add(twoMinutes).padRight(20);
-//        timeButtonsTable.add(fiveMinutes).padRight(20);
-//        timeButtonsTable.add(twentyMinutes);
-//        table.add(timeButtonsTable).left();
+
         table.add(largePreview).padLeft(10).right();
         Table rightSide = new Table();
         characterName.setFontScale(3f);
@@ -161,7 +159,8 @@ public class PreGameMenu implements Screen {
         weaponName.setText(UserDatabase.getDatabase().getCurrentUser().selectedWeapon);
         table.add(weaponName).padLeft(80).padBottom(30).right();
         gameTime.setFontScale(2f);
-        gameTime.setText("game duration : 5 minutes");
+        gameTime.setText(com.MinutesTillDawn.Model.Enums.Label.GAMEDURATION.getText()
+            + GameSettings.gameTime +" minutes");
         table.add(gameTime).padLeft(20).padBottom(30);
         table.row();
         table.add(weaponsTable).colspan(2).padTop(30).bottom().left();
@@ -176,8 +175,15 @@ public class PreGameMenu implements Screen {
 
     @Override
     public void render(float v) {
-
         ScreenUtils.clear(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
+        Batch batch = Main.getBatch();
+        if (GameAssetManager.getGameAssetManager().bwEnabled) {
+            ScreenUtils.clear(Color.BLACK);
+            batch.setShader(Main.getMain().grayscaleShader);
+        } else {
+            batch.setShader(null);
+        }
+
         Main.getBatch().begin();
         Main.getBatch().end();
         stage.act(v);

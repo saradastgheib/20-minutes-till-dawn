@@ -26,9 +26,9 @@ public class MainMenu implements Screen {
     private final MainMenuController controller;
     public MainMenu(MainMenuController controller, Skin skin) {
         this.controller = controller;
-        changeMenuButton = new TextButton("Change menu", skin);
-        playSavedGame = new TextButton("Resume last saved game", skin);
-        logoutButton = new TextButton("Logout" ,skin);
+        changeMenuButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.CHANGEMENU.getText(), skin);
+        playSavedGame = new TextButton(com.MinutesTillDawn.Model.Enums.Label.RESUMELASTGAME.getText(), skin);
+        logoutButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.LOGOUT.getText(), skin);
         this.skin = skin;
         controller.setView(this);
     }

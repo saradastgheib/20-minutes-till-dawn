@@ -7,10 +7,10 @@ import com.badlogic.gdx.utils.Array;
 
 public class GameSettings {
     public static int gameTime = 5;
-    static Array<Music> musics = new Array<>();
-    static int[] currentTrackIndex = {0};
-    public static boolean sfxEnabled = true, autoReloadEnabled;
-    public static String controlScheme;
+    public static Array<Music> musics = new Array<>();
+    public static int[] currentTrackIndex = {0};
+    public static boolean sfxEnabled = true, autoReloadEnabled = true;
+    public static String controlScheme = "ARROWS", language = "english";
    static  {
         musics.add(Gdx.audio.newMusic(Gdx.files.internal("music/disasterpeace.mp3")));
        musics.add(Gdx.audio.newMusic(Gdx.files.internal("music/lazerhawk.mp3")));
@@ -18,5 +18,10 @@ public class GameSettings {
     }
     public static Music getCurrentMusic() {
        return musics.get(currentTrackIndex[0]);
+    }
+    public static void setVolume(float volume) {
+       for (Music music : musics) {
+           music.setVolume(volume);
+       }
     }
 }
