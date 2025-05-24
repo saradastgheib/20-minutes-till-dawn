@@ -113,8 +113,6 @@ public class GameScreen  implements Screen, InputProcessor {
 
     @Override
     public void render(float v) {
-
-        try {
             Main.getBatch().setColor(1, 1, 1, 1);
             Batch batch = Main.getBatch();
             if (GameAssetManager.getGameAssetManager().bwEnabled) {
@@ -126,19 +124,19 @@ public class GameScreen  implements Screen, InputProcessor {
                 controller.timeRemaining -= v;
             } else {
                 controller.timeRemaining = 0;
-                //endGame()
+                //endGame(true)
             }
+            if (controller.getPlayerController().getPlayer().getHealthPoints() <= 0) {
+                //endGame(false);
+            }
+
             controller.updateGame();
             Main.getBatch().begin();
-
+            controller.getPlayerController().getPlayer().updateAbilities(v);
             controller.renderGame();
 
             Main.getBatch().end();
             stage.draw();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     @Override

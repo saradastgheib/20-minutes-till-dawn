@@ -1,6 +1,6 @@
 package com.MinutesTillDawn.Model;
 
-import com.MinutesTillDawn.Model.Enums.Ability;
+import com.MinutesTillDawn.Model.Ability.Ability;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -13,7 +13,7 @@ public class Player {
     private Sprite playerSprite;
     public boolean isGuest;
     private User user;
-    private int pointsInThisGame = 0, healthPoints = 5; //TODO initialize this
+    private int healthPoints = 5; //TODO initialize this
     private float speed = 5;
     private float posX = 0, posY = 0;
     private CollisionRect rect;
@@ -23,6 +23,9 @@ public class Player {
     public String selectedHero;
     public String selectedWeapon = "revolver";
     private List<Ability> retrievedAbilities = new ArrayList<>();
+    private Weapon weapon ;
+    private float damageMultiplier = 1, speedMultiplier = 1;
+
 
     private int xp = 0, level = 1;
 
@@ -36,6 +39,7 @@ public class Player {
 
     public void setSelectedWeapon(String weaponName) {
         this.selectedWeapon = weaponName;
+
     }
     public void setSelectedHero(String heroName) {
         selectedHero = heroName;
@@ -141,5 +145,32 @@ public class Player {
         return user;
     }
 
+    public void increaseHP(int amount) {
+        healthPoints += amount;
+    }
+     public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+     }
 
+     public Weapon getWeapon() {
+        return weapon;
+     }
+
+    public void setDamageMultiplier(float damageMultiplier) {
+        this.damageMultiplier = damageMultiplier;
+    }
+
+    public void setSpeedMultiplier(float speedMultiplier) {
+        this.speedMultiplier = speedMultiplier;
+    }
+    public void addAbility(Ability ability) {
+        retrievedAbilities.add(ability);
+        ability.activate(this);
+    }
+
+    public void updateAbilities(float delta) {
+        for (Ability ability : retrievedAbilities) {
+            ability.update(this, delta);
+        }
+    }
 }

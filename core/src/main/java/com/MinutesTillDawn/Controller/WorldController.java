@@ -18,8 +18,8 @@ public class WorldController {
     public WorldController(PlayerController playerController) {
         this.playerController = playerController;
 
-        int screenWidth = Gdx.graphics.getWidth() * 5/2;
-        int screenHeight = Gdx.graphics.getHeight() * 5/2;
+        int screenWidth = Gdx.graphics.getWidth() * 3;
+        int screenHeight = Gdx.graphics.getHeight() * 3;
         tilesX = screenWidth / tileSize + 4;
         tilesY = screenHeight / tileSize + 4;
         backgroundTiles = new TextureRegion[tilesX][tilesY];

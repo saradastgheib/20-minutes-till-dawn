@@ -14,7 +14,9 @@ public class GameController {
         Player orgPlayer = UserDatabase.getDatabase().getCurrentUser();
         Player player = new Player(orgPlayer.getUser(), orgPlayer.isGuest);
         timeRemaining = GameSettings.gameTime * 60f;
-        weaponController = new WeaponController(new Weapon(player.selectedWeapon));
+        Weapon weapon = new Weapon(player.selectedWeapon);
+        weaponController = new WeaponController(weapon);
+        player.setWeapon(weapon);
         playerController = new PlayerController(player);
         worldController = new WorldController(playerController);
     }

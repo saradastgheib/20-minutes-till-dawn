@@ -2,7 +2,7 @@ package com.MinutesTillDawn.View;
 
 import com.MinutesTillDawn.Controller.PauseMenuController;
 import com.MinutesTillDawn.Main;
-import com.MinutesTillDawn.Model.Enums.Ability;
+import com.MinutesTillDawn.Model.Ability.Ability;
 import com.MinutesTillDawn.Model.GameAssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

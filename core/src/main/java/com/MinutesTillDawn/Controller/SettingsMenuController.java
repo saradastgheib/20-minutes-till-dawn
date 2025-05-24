@@ -66,7 +66,7 @@ public class SettingsMenuController {
             public void clicked(InputEvent event, float x, float y) {
                 if (GameSettings.language.equals("english")) GameSettings.language = "french";
                 else GameSettings.language = "english";
-                System.out.println("clicked");
+                Main.getMain().setScreen(new SettingsMenu());
             }
         });
     }
