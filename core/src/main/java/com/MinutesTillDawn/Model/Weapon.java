@@ -9,7 +9,10 @@ public class Weapon {
     String name;
     private Texture weaponTexture;
     private Sprite weaponSprite;
-    private int ammo = 30, ammoMax = 30, damage = 20, projectile = 1,reloadTime = 1; // TODO SET THIS!!!
+    private int ammo = 30, ammoMax = 30, damage = 20, projectile = 1; // TODO SET THIS!!!
+    private float reloadTime = 10;
+    private float reloadTimer = 0;
+    private boolean isReloading  = false;
 
     public Weapon(String name){
 
@@ -47,5 +50,29 @@ public class Weapon {
 
     public void setAmmoMax(int ammoMax) {
         this.ammoMax = ammoMax;
+    }
+
+    public void reload() {
+        if (!isReloading) {
+            isReloading = true;
+            reloadTimer = reloadTime;
+        }
+    }
+
+    public void update(float delta) {
+        if (isReloading) {
+            reloadTimer -= delta;
+            if (reloadTimer <= 0) {
+                isReloading = false;
+            }
+        }
+    }
+
+    public boolean canShoot() {
+        return !isReloading;
+    }
+
+    public boolean isReloading() {
+        return isReloading;
     }
 }

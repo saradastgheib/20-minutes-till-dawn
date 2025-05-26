@@ -4,9 +4,11 @@ import com.MinutesTillDawn.Model.Ability.Ability;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Player {
     private Texture playerTexture;
@@ -172,5 +174,11 @@ public class Player {
         for (Ability ability : retrievedAbilities) {
             ability.update(this, delta);
         }
+    }
+    public Vector2 getCenter() {
+        return new Vector2(
+            getPosX() + getPlayerSprite().getWidth() / 2f,
+            getPosY() + getPlayerSprite().getHeight() / 2f
+        );
     }
 }
