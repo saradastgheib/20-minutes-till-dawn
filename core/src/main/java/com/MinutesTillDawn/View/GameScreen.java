@@ -1,11 +1,10 @@
 package com.MinutesTillDawn.View;
 
 import com.MinutesTillDawn.Controller.GameController;
+import com.MinutesTillDawn.Controller.ScoreController;
 import com.MinutesTillDawn.Main;
-import com.MinutesTillDawn.Model.Bullet;
-import com.MinutesTillDawn.Model.Enemy;
-import com.MinutesTillDawn.Model.GameAssetManager;
-import com.MinutesTillDawn.Model.Player;
+import com.MinutesTillDawn.Model.*;
+import com.MinutesTillDawn.Model.Enums.ScoreEntry;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -95,11 +94,10 @@ public class GameScreen  implements Screen, InputProcessor {
 
             Player player = controller.getPlayerController().getPlayer();
             Sprite playerSprite = player.getPlayerSprite();
-            float playerX = player.getPosX();
-            float playerY = player.getPosY();
-            float gunTipX = playerX + 50f;
-            float gunTipY = playerY + 50f;
-
+            float screenCenterX = Gdx.graphics.getWidth() / 2f;
+            float screenCenterY = Gdx.graphics.getHeight() / 2f;
+            float gunTipX = screenCenterX + 90f;
+            float gunTipY = screenCenterY + 90f;
             Vector2 bulletStartPos = new Vector2(gunTipX, gunTipY);
             Vector2 bulletTargetPos = new Vector2(controller.virtualMousePos.x, controller.virtualMousePos.y);
 
@@ -149,7 +147,9 @@ public class GameScreen  implements Screen, InputProcessor {
 
     @Override
     public void render(float v) {
+        try {
             Main.getBatch().setColor(1, 1, 1, 1);
+            Player player = controller.getPlayerController().getPlayer();
             Batch batch = Main.getBatch();
             if (GameAssetManager.getGameAssetManager().bwEnabled) {
                 batch.setShader(Main.getMain().grayscaleShader);
@@ -160,32 +160,38 @@ public class GameScreen  implements Screen, InputProcessor {
                 controller.timeRemaining -= v;
             } else {
                 controller.timeRemaining = 0;
+
+                ScoreController.getController().addScore(new ScoreEntry(player.getUsername(), player.getTotalPoints(), player.kills, GameSettings.gameTime));
                 //endGame(true)
             }
-            if (controller.getPlayerController().getPlayer().getHealthPoints() <= 0) {
+            if (player.getHealthPoints() <= 0) {
                 //endGame(false);
+                ScoreController.getController().addScore(new ScoreEntry(player.getUsername(), player.getTotalPoints(), player.kills, GameSettings.gameTime * 60f - controller.timeRemaining));
+
             }
 
             controller.updateGame();
             Main.getBatch().begin();
-            Player player = controller.getPlayerController().getPlayer();
             player.updateAbilities(v);
-           player.getWeapon().update(v);
+            player.getWeapon().update(v);
             controller.renderGame();
 
             Main.getBatch().end();
             stage.draw();
-        for (Bullet b : bullets) {
-            b.update(v);
-        }
+            for (Bullet b : bullets) {
+                b.update(v);
+            }
 
 // Draw bullets
-        shapeRenderer.setProjectionMatrix(stage.getViewport().getCamera().combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        for (Bullet b : bullets) {
-            b.draw(shapeRenderer);
+            shapeRenderer.setProjectionMatrix(stage.getViewport().getCamera().combined);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            for (Bullet b : bullets) {
+                b.draw(shapeRenderer);
+            }
+            shapeRenderer.end();
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        shapeRenderer.end();
     }
 
     @Override

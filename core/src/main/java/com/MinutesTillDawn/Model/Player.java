@@ -27,6 +27,7 @@ public class Player {
     private List<Ability> retrievedAbilities = new ArrayList<>();
     private Weapon weapon ;
     private float damageMultiplier = 1, speedMultiplier = 1;
+    public int kills = 0;
 
 
     private int xp = 0, level = 1;
@@ -52,7 +53,7 @@ public class Player {
         this.posX = screenCenterX;
         this.posY = screenCenterY;
         playerSprite.setPosition(screenCenterX, screenCenterY);
-        playerSprite.setSize(playerTexture.getWidth()*3.5f, playerTexture.getHeight()*3.5f);
+        playerSprite.setSize(playerTexture.getWidth()*4f, playerTexture.getHeight()*4f);
     }
     public String getAvatarPath() {
         return user.getAvatarPath();

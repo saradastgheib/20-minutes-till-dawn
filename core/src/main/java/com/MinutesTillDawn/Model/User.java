@@ -8,7 +8,7 @@ public class User {
     private String password;
     private String characterName;
     private String securityQuestion, securityAnswer;
-    private int totalPoints = 0;
+    private int totalPoints = 0, kills = 0, timeSurvived = 0;
 
 
     public User() {}
