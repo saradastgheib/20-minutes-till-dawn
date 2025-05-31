@@ -2,8 +2,9 @@ package com.MinutesTillDawn.View;
 
 import com.MinutesTillDawn.Controller.ScoreController;
 import com.MinutesTillDawn.Main;
-import com.MinutesTillDawn.Model.Enums.ScoreEntry;
+import com.MinutesTillDawn.Model.ScoreEntry;
 import com.MinutesTillDawn.Model.GameAssetManager;
+import com.MinutesTillDawn.Model.UserDatabase;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -12,30 +13,43 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Scoreboard implements Screen {
     Stage stage;
-    ScoreController manager = ScoreController.getController();
+    ScoreController manager;
     Skin skin = GameAssetManager.getGameAssetManager().getSkin();
-    String sortBy = "survivaltime";
+
+    public TextButton sortByScore, sortByKills, sortByTime, sortByName;
+
+    public Scoreboard() {
+        manager = ScoreController.getController();
+         sortByScore = new TextButton("Sort by Score", skin);
+         sortByKills = new TextButton("Sort by Kills", skin);
+         sortByTime = new TextButton("Sort by Time", skin);
+         sortByName = new TextButton("Sort by Username", skin);
+         manager.setView(this);
+    }
     @Override
     public void show() {
 
         try {
             stage = new Stage();
 
+            Gdx.input.setInputProcessor(stage);
             Table table = new Table();
             table.setFillParent(true);
             stage.addActor(table);
 
-            Array<ScoreEntry> sortedScores = manager.getScoresSortedBy(sortBy);
+            Array<ScoreEntry> sortedScores = manager.getScoresSortedBy(manager.sortBy);
 
             Label title = new Label("Top 10 Players", skin);
             title.setFontScale(2f);
+            title.setColor(92f / 255f, 116f/255f, 92f/255f, 1);
             System.out.println("meow");
-            table.add(title).colspan(4).padBottom(20).row();
+            table.add(title).colspan(4).padBottom(50).row();
             System.out.println("meow1");
             // Header
             table.add(new Label("Username" , skin)).pad(10);
@@ -47,16 +61,30 @@ public class Scoreboard implements Screen {
             for (int i = 0; i < Math.min(10, sortedScores.size); i++) {
                 ScoreEntry entry = sortedScores.get(i);
                 Label nameLabel = new Label(entry.username, skin);
-                if (i == 0) nameLabel.setColor(Color.GOLD);
-                else if (i == 1) nameLabel.setColor(new Color(192f / 255f, 192f / 255f, 192f / 25f, 1));
-                else if (i == 2) nameLabel.setColor(new Color(205f / 255f, 127f / 25f, 50f / 255f, 1));
+                if (i == 0 || i == 1 || i == 2) {
+                    nameLabel.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
+                }
 
+                if (entry.username.equals(UserDatabase.getDatabase().getCurrentUser().getUsername())) {
+                    nameLabel.setColor(92f / 255f, 116f/25f, 92f/255f, 1);
+                }
                 table.add(nameLabel);
                 table.add(new Label(String.valueOf(entry.score) ,skin));
                 table.add(new Label(String.valueOf(entry.kills), skin));
                 table.add(new Label(String.valueOf(entry.survivalTime), skin));
                 table.row();
+
+
             }
+
+            setButton(sortByScore);
+            setButton(sortByKills);
+            setButton(sortByTime);
+            setButton(sortByName);
+            table.add(sortByScore).padTop(50).padRight(20);
+            table.add(sortByKills).padTop(50).padRight(20);
+            table.add(sortByTime).padTop(50).padRight(20);
+            table.add(sortByName).padTop(50).padRight(20);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -106,5 +134,10 @@ public class Scoreboard implements Screen {
     @Override
     public void dispose() {
 
+    }
+    private void setButton(TextButton button) {
+        button.setColor(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
+        button.getStyle().fontColor = Color.WHITE;
+        button.getStyle().overFontColor= new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f);
     }
 }

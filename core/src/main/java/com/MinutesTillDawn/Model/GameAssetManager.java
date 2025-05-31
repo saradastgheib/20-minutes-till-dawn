@@ -1,5 +1,6 @@
 package com.MinutesTillDawn.Model;
 
+import com.MinutesTillDawn.Model.Enums.EnemyType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,8 +19,8 @@ public class GameAssetManager {
     private  Skin skin = new Skin(Gdx.files.internal("skin/pixthulhu-ui.json"));
     private  Array<String> characterNames = new Array<>();
     private final HashMap<String, Animation<TextureRegion>> characterIdleAnimations = new HashMap<>();
+    private final  HashMap<String, Animation<TextureRegion>> enemyAnimations = new HashMap<>();
     public boolean bwEnabled = false;
-    private final String bullet = "bullet.png";
     private final  Array<TextureRegion> tiles = new Array<>();
 
 
@@ -28,6 +29,7 @@ public class GameAssetManager {
     public GameAssetManager () {
         loadAvatars();
         loadCharacterIdleAnimation();
+        loadEnemyAnimation();
         initializeTiles();
 
     }
@@ -91,12 +93,26 @@ public class GameAssetManager {
             characterIdleAnimations.put(characterName, idleAnimation);
         }
     }
+    public void loadEnemyAnimation() {
+        for (EnemyType type : EnemyType.values()) {
+            Array<TextureRegion> frames = new Array<>();
+            String name = type.name().toLowerCase();
+            for (int i = 1; i < 5; i++) {
+                String path = "monsters/" + name + "/pic" + i + ".png";
+                Texture texture = new Texture(Gdx.files.internal(path));
+                TextureRegion region = new TextureRegion(texture);
+                frames.add(region);
+            }
+            Animation<TextureRegion> animation =  new Animation<>(0.2f, frames, Animation.PlayMode.LOOP);
+            enemyAnimations.put(name, animation);
+        }
+    }
     public Animation<TextureRegion> getIdleAnimation(String characterFolder) {
         return characterIdleAnimations.get(characterFolder);
     }
 
-    public String getBullet() {
-        return bullet;
+    public Animation<TextureRegion> getEnemyAnimation (String name) {
+        return enemyAnimations.get(name);
     }
 
     public Array<String> getCharacterNames() {

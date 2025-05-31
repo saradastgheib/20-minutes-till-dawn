@@ -4,34 +4,31 @@ import com.MinutesTillDawn.Controller.GameController;
 import com.MinutesTillDawn.Controller.ScoreController;
 import com.MinutesTillDawn.Main;
 import com.MinutesTillDawn.Model.*;
-import com.MinutesTillDawn.Model.Enums.ScoreEntry;
+import com.MinutesTillDawn.Model.Enums.EnemyType;
+import com.MinutesTillDawn.Model.ScoreEntry;
+import com.MinutesTillDawn.Model.saveStuff.EnemyData;
+import com.MinutesTillDawn.Model.saveStuff.SaveData;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.Random;
 
 public class GameScreen  implements Screen, InputProcessor {
     private Stage stage;
-    private GameController controller;
-    private Array<Bullet> bullets = new Array<>();
-    private ShapeRenderer shapeRenderer = new ShapeRenderer();
+    private final GameController controller;
+    private final Array<Bullet> bullets = new Array<>();
+    private final ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 
     Random random = new Random();
@@ -39,6 +36,25 @@ public class GameScreen  implements Screen, InputProcessor {
     public GameScreen(GameController controller, Skin skin) {
         this.controller = controller;
         controller.setView(this);
+
+    }
+
+    public GameScreen(SaveData data) {
+
+        controller = new GameController();
+        controller.setView(this);
+        Player player = controller.getPlayerController().getPlayer();
+        player.setPosition(data.playerX, data.playerY);
+        player.setHealth(data.playerHP);
+        player.setKills(data.kills);
+        controller.timeRemaining = data.timeRemaining;
+
+        for (EnemyData e : data.enemies) {
+            Enemy enemy = new Enemy(EnemyType.valueOf(e.type.toUpperCase()));
+            enemy.setPosition(e.x, e.y);
+            enemy.setHealth(e.hp);
+            controller.enemies.add(enemy);
+        }
 
     }
     @Override
@@ -100,9 +116,11 @@ public class GameScreen  implements Screen, InputProcessor {
             float gunTipY = screenCenterY + 90f;
             Vector2 bulletStartPos = new Vector2(gunTipX, gunTipY);
             Vector2 bulletTargetPos = new Vector2(controller.virtualMousePos.x, controller.virtualMousePos.y);
-
+            System.out.println("hello");
             if (player.getWeapon().canShoot()){
+                System.out.println("meow");
                 bullets.add(new Bullet(bulletStartPos, bulletTargetPos));
+                player.getWeapon().shoot();
             }
         }
         return false;
@@ -138,7 +156,6 @@ public class GameScreen  implements Screen, InputProcessor {
         try {
             stage = new Stage(new ScreenViewport(), Main.getBatch());
             Gdx.input.setInputProcessor(this);
-            controller.enemies.add(new Enemy("eow"));
         }
         catch (Exception e) {
             System.out.println("2" + e.getMessage());
@@ -156,12 +173,14 @@ public class GameScreen  implements Screen, InputProcessor {
             } else {
                 batch.setShader(null);
             }
+
             if (controller.timeRemaining > 0) {
                 controller.timeRemaining -= v;
             } else {
                 controller.timeRemaining = 0;
 
                 ScoreController.getController().addScore(new ScoreEntry(player.getUsername(), player.getTotalPoints(), player.kills, GameSettings.gameTime));
+                Main.getMain().setScreen(MainMenu.getMainMenu());
                 //endGame(true)
             }
             if (player.getHealthPoints() <= 0) {
@@ -170,7 +189,7 @@ public class GameScreen  implements Screen, InputProcessor {
 
             }
 
-            controller.updateGame();
+            controller.updateGame(v);
             Main.getBatch().begin();
             player.updateAbilities(v);
             player.getWeapon().update(v);

@@ -17,45 +17,33 @@ public class PlayerController {
         this.player = player;
     }
 
-    public void update() {
+    public void update(float v) {
 
 
         if (player.isPlayerIdle()) {
             idleAnimation();
         }
-        handlePlayerInput();
+        handlePlayerInput(v);
     }
     public void render() {
+        player.getPlayerSprite().setPosition(player.getPosX(), player.getPosY());
         player.getPlayerSprite().setRegion(region);
         player.getPlayerSprite().draw(Main.getBatch());
     }
-    public void handlePlayerInput() {
-        if (GameSettings.controlScheme.equals("ARROWS")){
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                player.setPosY(player.getPosY() - player.getSpeed());
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                player.setPosX(player.getPosX() - player.getSpeed());
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                player.setPosX(player.getPosX() + player.getSpeed());
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                player.setPosY(player.getPosY() + player.getSpeed());
-            }
-        }else {
-            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                player.setPosY(player.getPosY() - player.getSpeed());
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                player.setPosX(player.getPosX() - player.getSpeed());
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                player.setPosX(player.getPosX() + player.getSpeed());
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                player.setPosY(player.getPosY() + player.getSpeed());
-            }
+    public void handlePlayerInput(float v) {
+        float delta = Gdx.graphics.getDeltaTime();
+        float moveAmount = player.getSpeed() * delta * 3;
+
+        if (GameSettings.controlScheme.equals("ARROWS")) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)) player.setPosY(player.getPosY() + moveAmount);
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) player.setPosX(player.getPosX() + moveAmount);
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) player.setPosX(player.getPosX() - moveAmount);
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) player.setPosY(player.getPosY() - moveAmount);
+        } else {
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) player.setPosY(player.getPosY() + moveAmount);
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) player.setPosX(player.getPosX() + moveAmount);
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) player.setPosX(player.getPosX() - moveAmount);
+            if (Gdx.input.isKeyPressed(Input.Keys.S)) player.setPosY(player.getPosY() - moveAmount);
         }
     }
 

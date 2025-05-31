@@ -1,8 +1,11 @@
 package com.MinutesTillDawn.Controller;
 
 import com.MinutesTillDawn.Model.*;
+import com.MinutesTillDawn.Model.Enums.EnemyType;
 import com.MinutesTillDawn.View.GameScreen;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public class GameController {
     private WeaponController weaponController;
     private WorldController worldController;
     private PlayerController playerController;
+    private EnemyController enemyController;
     public float timeRemaining;
     public Vector2 virtualMousePos = new Vector2();
     public boolean aimAutoEnabled = false;
@@ -30,9 +34,10 @@ public class GameController {
         player.setWeapon(weapon);
         playerController = new PlayerController(player);
         worldController = new WorldController(playerController);
+        enemyController = new EnemyController(this);
     }
 
-    public void updateGame() {
+    public void updateGame(float v) {
         if (view != null) {
             if (aimAutoEnabled) {
                 Enemy target = getClosestEnemy(playerController.player.getCenter(), enemies);
@@ -44,8 +49,9 @@ public class GameController {
                 view.getStage().getViewport().unproject(virtualMousePos);
             }
 
-            playerController.update();
+            playerController.update(v);
             weaponController.update(playerController.getPlayer());
+            enemyController.update(v);
         }
     }
 
@@ -66,6 +72,7 @@ public class GameController {
         worldController.update();
        playerController.render();
         weaponController.render();
+        enemyController.render();
     }
     public PlayerController getPlayerController() {
         return playerController;
@@ -78,4 +85,40 @@ public class GameController {
     public WorldController getWorldController() {
         return worldController;
     }
+
+    public void spawnEnemy(EnemyType enemyType) {
+        OrthographicCamera camera = worldController.getCamera();
+        float x, y;
+        int side = MathUtils.random(3); // 0 = top, 1 = right, 2 = bottom, 3 = left
+
+        float camX = camera.position.x;
+        float camY = camera.position.y;
+        float viewWidth = camera.viewportWidth;
+        float viewHeight = camera.viewportHeight;
+
+        switch (side) {
+            case 0: // Top
+                x = MathUtils.random(camX - viewWidth / 2f, camX + viewWidth / 2f);
+                y = camY + viewHeight / 2f + 50;
+                break;
+            case 1: // Right
+                x = camX + viewWidth / 2f + 50;
+                y = MathUtils.random(camY - viewHeight / 2f, camY + viewHeight / 2f);
+                break;
+            case 2: // Bottom
+                x = MathUtils.random(camX - viewWidth / 2f, camX + viewWidth / 2f);
+                y = camY - viewHeight / 2f - 50;
+                break;
+            default: // Left
+                x = camX - viewWidth / 2f - 50;
+                y = MathUtils.random(camY - viewHeight / 2f, camY + viewHeight / 2f);
+                break;
+        }
+
+        System.out.println("enemy on  x : " + x + " y: " + y);
+        Enemy enemy = new Enemy(enemyType);
+        enemy.setPosition(x, y);
+        enemies.add(enemy);
+    }
+
 }

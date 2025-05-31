@@ -182,4 +182,17 @@ public class Player {
             getPosY() + getPlayerSprite().getHeight() / 2f
         );
     }
+
+    public void setPosition(float x, float y) {
+        posX = x;
+        posY = y;
+    }
+
+    public void setHealth(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
+    public void setKills(int kills){
+        this.kills = kills;
+    }
 }

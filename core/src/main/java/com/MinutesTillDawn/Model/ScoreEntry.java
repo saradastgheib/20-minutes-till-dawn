@@ -1,4 +1,4 @@
-package com.MinutesTillDawn.Model.Enums;
+package com.MinutesTillDawn.Model;
 
 
 public class ScoreEntry {
