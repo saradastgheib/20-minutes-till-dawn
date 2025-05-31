@@ -18,6 +18,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -29,10 +30,9 @@ public class GameScreen  implements Screen, InputProcessor {
     private final GameController controller;
     private final Array<Bullet> bullets = new Array<>();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
-
-
-    Random random = new Random();
-
+    Skin skin = GameAssetManager.getGameAssetManager().getSkin();
+    Label levelLabel;
+    Label killLabel;
     public GameScreen(GameController controller, Skin skin) {
         this.controller = controller;
         controller.setView(this);
@@ -47,6 +47,7 @@ public class GameScreen  implements Screen, InputProcessor {
         player.setPosition(data.playerX, data.playerY);
         player.setHealth(data.playerHP);
         player.setKills(data.kills);
+        player.setLevel(data.level);
         controller.timeRemaining = data.timeRemaining;
 
         for (EnemyData e : data.enemies) {
@@ -115,7 +116,8 @@ public class GameScreen  implements Screen, InputProcessor {
             float gunTipX = screenCenterX + 90f;
             float gunTipY = screenCenterY + 90f;
             Vector2 bulletStartPos = new Vector2(gunTipX, gunTipY);
-            Vector2 bulletTargetPos = new Vector2(controller.virtualMousePos.x, controller.virtualMousePos.y);
+            Sprite cursor = GameAssetManager.getGameAssetManager().getCursor();
+            Vector2 bulletTargetPos = new Vector2(controller.virtualMousePos.x + cursor.getWidth()/2, controller.virtualMousePos.y + cursor.getHeight()/2);
             System.out.println("hello");
             if (player.getWeapon().canShoot()){
                 System.out.println("meow");
@@ -156,6 +158,17 @@ public class GameScreen  implements Screen, InputProcessor {
         try {
             stage = new Stage(new ScreenViewport(), Main.getBatch());
             Gdx.input.setInputProcessor(this);
+            Gdx.input.setCursorCatched(true);
+            levelLabel = new Label("level: 1", skin);
+            levelLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 10);
+            levelLabel.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
+            levelLabel.setFontScale(1.1f);
+            stage.addActor(levelLabel);
+            killLabel = new Label("kills: 0", skin);
+            killLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 40);
+            killLabel.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
+            killLabel.setFontScale(1.1f);
+            stage.addActor(killLabel);
         }
         catch (Exception e) {
             System.out.println("2" + e.getMessage());
@@ -196,6 +209,8 @@ public class GameScreen  implements Screen, InputProcessor {
             controller.renderGame();
 
             Main.getBatch().end();
+            levelLabel.setText("level: " + player.getLevel());
+            killLabel.setText("kills: " + player.kills);
             stage.draw();
             for (Bullet b : bullets) {
                 b.update(v);

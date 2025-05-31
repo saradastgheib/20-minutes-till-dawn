@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 public enum EnemyType {
     TENTACLE_MONSTER(25),
     EYEBAT(50),
-    ELDER(400)
+    ELDER(400),
+    TREE(50)
     ;
     final int hp;
     EnemyType(int hp){

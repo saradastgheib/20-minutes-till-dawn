@@ -9,5 +9,6 @@ public class SaveData {
     public int kills;
     public float timeRemaining;
     public Array<EnemyData> enemies; // موقعیت دشمن‌ها
+    public int level;
     public Array<String> abilities; // لیست توانایی‌ها یا وضعیت‌ها
 }

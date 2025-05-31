@@ -2,26 +2,31 @@ package com.MinutesTillDawn.Model;
 
 import com.MinutesTillDawn.Model.Enums.EnemyType;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.Locale;
 
 public class Enemy {
+    public EnemyState state = EnemyState.ALIVE;
     private Texture enemyTexture;
-    private Sprite enemySprite;
+    private final Sprite enemySprite;
     public TextureRegion region;
     private float posX = 950, posY = 500;
     private int hp;
     private final EnemyType type;
+    public float deathTime = 0f;
+    public Animation<TextureRegion> deathAnimation;
+
     public Enemy(EnemyType type) {
         enemyTexture = type.getTexture();
         enemySprite = new Sprite(enemyTexture);
-        enemySprite.setSize(enemyTexture.getWidth()*3, enemyTexture.getHeight() * 3);
-
+        if (type != EnemyType.EYEBAT)
+            enemySprite.setSize(enemyTexture.getWidth()*3, enemyTexture.getHeight() * 3);
         hp = type.getHp();
         this.type = type;
+        deathAnimation = GameAssetManager.getGameAssetManager().getDeathAnimation();
     }
     public float getX() {
         return posX;
@@ -54,5 +59,10 @@ public class Enemy {
 
     public Sprite getEnemySprite() {
         return enemySprite;
+    }
+
+    public void die() {
+        state = EnemyState.DYING;
+        deathTime = 0f;
     }
 }

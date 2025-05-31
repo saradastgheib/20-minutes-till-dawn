@@ -37,6 +37,7 @@ public class PauseMenu implements Screen {
     public void show() {
         stage = new Stage(new ScreenViewport(), Main.getBatch());
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCursorCatched(false);
         Table table = new Table();
         table.setFillParent(true);
         table.pad(30);

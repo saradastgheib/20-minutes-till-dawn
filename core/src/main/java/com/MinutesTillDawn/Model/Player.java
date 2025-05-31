@@ -70,6 +70,14 @@ public class Player {
         return user.getTotalPoints();
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public float getPosX() {
         return posX;
     }

@@ -1,6 +1,6 @@
 package com.MinutesTillDawn.View;
 
-import com.MinutesTillDawn.Controller.ForgotPasswordController;
+import com.MinutesTillDawn.Controller.ChangeUsernameController;
 import com.MinutesTillDawn.Main;
 import com.MinutesTillDawn.Model.GameAssetManager;
 import com.badlogic.gdx.Gdx;
@@ -12,34 +12,26 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class ForgotPasswordMenu implements Screen {
-    public static ForgotPasswordMenu forgotPasswordMenu;
-    private ForgotPasswordController controller;
-    private final Skin skin;
-    public TextField passwordField, usernameField;
-    public TextButton resetPasswordButton;
+public class ChangeUsername implements Screen {
+    private ChangeUsernameController controller = new ChangeUsernameController();
+    private Skin skin = GameAssetManager.getGameAssetManager().getSkin();
+    public TextField  usernameField;
+    public TextButton changeUsernameButton;
     public TextButton backButton;
     public Stage stage;
     public Label error;
 
-    public ForgotPasswordMenu (ForgotPasswordController controller, Skin skin) {
-        forgotPasswordMenu = this;
-        this.skin = skin;
-        this.controller = controller;
-        this.passwordField = new TextField("", skin);
+
+    public ChangeUsername() {
         this.usernameField = new TextField("", skin);
-        this.resetPasswordButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.RESETPASSWORD.getText(), skin);
+        this.changeUsernameButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.CHANGEUSERNAME.getText(), skin);
         this.error = new Label("", skin);
         this.backButton = new TextButton(com.MinutesTillDawn.Model.Enums.Label.BACK.getText(), skin);
         controller.setView(this);
     }
-
-    public static ForgotPasswordMenu getForgotPasswordMenu() {
-        if (forgotPasswordMenu != null) return  forgotPasswordMenu;
-        return  new ForgotPasswordMenu(ForgotPasswordController.getController(), GameAssetManager.getGameAssetManager().getSkin());
-    }
     @Override
     public void show() {
+
         stage = new Stage(new ScreenViewport(), Main.getBatch());
         Gdx.input.setInputProcessor(stage);
 
@@ -47,27 +39,21 @@ public class ForgotPasswordMenu implements Screen {
         table.setFillParent(true);
         table.center();
         stage.addActor(table);
-        Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.FORGOTYOURPASSWORD.getText(), skin);
+        Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.CHANGEUSERNAME.getText(), skin);
         title.setFontScale(1.2f);
-
-        usernameField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURUSERNAME.getText());
-        passwordField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURPASSWORD.getText());
-        passwordField.setPasswordMode(true);
-        passwordField.setPasswordCharacter('*');
+        usernameField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERNEWUSERNAME.getText());
         error.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
-        setButton(resetPasswordButton);
+        setButton(changeUsernameButton);
         setButton(backButton);
-        table.add(title).colspan(2).padBottom(10);
+        title.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
+        table.add(title).colspan(2).padBottom(60);
         table.row();
-        table.add(usernameField).colspan(2).width(400).padBottom(10);
+        table.add(usernameField).colspan(2).width(400).padBottom(60);
         table.row();
-        table.add(passwordField).colspan(2).width(400).padBottom(25);
-        table.row();
-        table.add(resetPasswordButton).width(450).padRight(70);
-        table.add(backButton).width(450);
+        table.add(changeUsernameButton).width(450).padRight(70).padBottom(40);
+        table.add(backButton).width(450).padBottom(40);
         table.row();
         table.add(error).colspan(2).padTop(10);
-
     }
 
     @Override
@@ -111,6 +97,7 @@ public class ForgotPasswordMenu implements Screen {
     public void dispose() {
 
     }
+
     private void setButton(TextButton button) {
         button.setColor(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
         button.getStyle().fontColor = Color.WHITE;

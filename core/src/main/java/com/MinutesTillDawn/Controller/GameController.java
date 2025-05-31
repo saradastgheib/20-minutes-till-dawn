@@ -1,10 +1,12 @@
 package com.MinutesTillDawn.Controller;
 
+import com.MinutesTillDawn.Main;
 import com.MinutesTillDawn.Model.*;
 import com.MinutesTillDawn.Model.Enums.EnemyType;
 import com.MinutesTillDawn.View.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
@@ -33,7 +35,7 @@ public class GameController {
         weaponController = new WeaponController(weapon);
         player.setWeapon(weapon);
         playerController = new PlayerController(player);
-        worldController = new WorldController(playerController);
+        worldController = new WorldController(playerController, this);
         enemyController = new EnemyController(this);
     }
 
@@ -73,6 +75,9 @@ public class GameController {
        playerController.render();
         weaponController.render();
         enemyController.render();
+        Sprite cursor = GameAssetManager.getGameAssetManager().getCursor();
+        cursor.setPosition(virtualMousePos.x, virtualMousePos.y);
+        cursor.draw(Main.getBatch());
     }
     public PlayerController getPlayerController() {
         return playerController;

@@ -1,23 +1,26 @@
 package com.MinutesTillDawn.Controller;
 
 import com.MinutesTillDawn.Main;
+import com.MinutesTillDawn.Model.Enemy;
+import com.MinutesTillDawn.Model.Enums.EnemyType;
 import com.MinutesTillDawn.Model.GameAssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import org.w3c.dom.Text;
 
 public class WorldController {
-    private PlayerController playerController;
+    private final PlayerController playerController;
     private float bgX = 0, bgY = 0;
     private TextureRegion[][] backgroundTiles;
     private final int tileSize = 32;
     private int tilesX, tilesY;
     private OrthographicCamera camera;
 
-    public WorldController(PlayerController playerController) {
+    public WorldController(PlayerController playerController, GameController controller) {
         this.playerController = playerController;
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -35,8 +38,20 @@ public class WorldController {
                 backgroundTiles[x][y] = forestTiles.random(); // assign once
             }
         }
+
+        spawnInitialTreeEnemies(controller);
+
     }
 
+    public void spawnInitialTreeEnemies(GameController controller) {
+        for (int i = 0; i < 50; i++) {
+            float x = MathUtils.random(-2000, 2000);
+            float y = MathUtils.random(-2000, 2000);
+            Enemy treeEnemy = new Enemy(EnemyType.TREE);
+            treeEnemy.setPosition(x, y);
+            controller.enemies.add(treeEnemy);
+        }
+    }
     public void update() {
         camera.position.set(playerController.getPlayer().getPosX(), playerController.getPlayer().getPosY(), 0);
         camera.update();

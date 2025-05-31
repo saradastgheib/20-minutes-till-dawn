@@ -70,7 +70,7 @@ public class PauseMenuController {
         data.playerHP = player.getHealthPoints();
         data.kills = player.kills;
         data.timeRemaining = controller.timeRemaining;
-
+        data.level = player.getLevel();
         data.enemies = new Array<>();
         for (Enemy enemy : controller.enemies) {
             EnemyData e = new EnemyData();

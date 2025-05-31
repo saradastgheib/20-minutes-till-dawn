@@ -4,6 +4,7 @@ import com.MinutesTillDawn.Model.Enums.EnemyType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -17,12 +18,13 @@ import java.util.HashMap;
 public class GameAssetManager {
     private static GameAssetManager gameAssetManager;
     private  Skin skin = new Skin(Gdx.files.internal("skin/pixthulhu-ui.json"));
-    private  Array<String> characterNames = new Array<>();
+    private final Array<String> characterNames = new Array<>();
     private final HashMap<String, Animation<TextureRegion>> characterIdleAnimations = new HashMap<>();
     private final  HashMap<String, Animation<TextureRegion>> enemyAnimations = new HashMap<>();
     public boolean bwEnabled = false;
     private final  Array<TextureRegion> tiles = new Array<>();
-
+    private final Sprite Cursor = new Sprite(new Texture("cursor.png"));
+    private Animation<TextureRegion> enemyDeath;
 
 
 
@@ -30,6 +32,7 @@ public class GameAssetManager {
         loadAvatars();
         loadCharacterIdleAnimation();
         loadEnemyAnimation();
+        loadDeathAnimation();
         initializeTiles();
 
     }
@@ -107,6 +110,20 @@ public class GameAssetManager {
             enemyAnimations.put(name, animation);
         }
     }
+    public void loadDeathAnimation() {
+        Array<TextureRegion> frames = new Array<>();
+        for (int i = 0; i <=5; i++) {
+            String path = "explosion/FireballExplosion_" + i + ".png";
+            Texture texture = new Texture(Gdx.files.internal(path));
+            TextureRegion region = new TextureRegion(texture);
+            frames.add(region);
+        }
+        enemyDeath = new Animation<>(0.1f, frames, Animation.PlayMode.NORMAL);
+    }
+
+    public Animation<TextureRegion> getDeathAnimation() {
+        return enemyDeath;
+    }
     public Animation<TextureRegion> getIdleAnimation(String characterFolder) {
         return characterIdleAnimations.get(characterFolder);
     }
@@ -118,4 +135,9 @@ public class GameAssetManager {
     public Array<String> getCharacterNames() {
         return characterNames;
     }
+
+    public Sprite getCursor() {
+        return Cursor;
+    }
+
 }

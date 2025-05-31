@@ -44,7 +44,9 @@ public enum Label {
     CONTROLLERSLABEL("keyboard controllers: ", "contrôleurs de clavier: "),
     CHOOSELABEL("choose your controllers", "choisissez vos contrôleurs"),
     ARROWS("Arrows", "Flèches"),
-    LANGUAGE("english", "spanish")
+    LANGUAGE("english", "spanish"),
+    CHANGEUSERNAME("change username", "changer de nom d'utilisateur"),
+    ENTERNEWUSERNAME("enter your new username", "entrez votre nouveau nom d'utilisateur")
     ;
 
 

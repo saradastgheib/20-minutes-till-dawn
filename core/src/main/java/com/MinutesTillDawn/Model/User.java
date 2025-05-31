@@ -48,4 +48,8 @@ public class User {
     public int getTotalPoints() {
         return totalPoints;
     }
+
+    public void setUsername(String newUsername) {
+        username = newUsername;
+    }
 }

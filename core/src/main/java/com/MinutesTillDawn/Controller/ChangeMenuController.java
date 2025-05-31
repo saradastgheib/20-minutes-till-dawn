@@ -45,5 +45,17 @@ public class ChangeMenuController {
                 Main.getMain().setScreen(new Scoreboard());
             }
         });
+        view.talent.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Main.getMain().setScreen(new hintMenu());
+            }
+        });
+        view.profile.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Main.getMain().setScreen(new ProfileMenu());
+            }
+        });
     }
 }

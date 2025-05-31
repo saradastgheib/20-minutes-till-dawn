@@ -85,6 +85,10 @@ public class UserDatabase {
         save();
     }
 
+    public void updateUsername(User user, String username) {
+        user.setUsername(username);
+        save();
+    }
     public void setCurrentUser(Player currentUser) {
         this.currentPlayer = currentUser;
     }
