@@ -7,6 +7,7 @@ import com.MinutesTillDawn.Model.GameSettings;
 import com.MinutesTillDawn.Model.Player;
 import com.MinutesTillDawn.Model.saveStuff.EnemyData;
 import com.MinutesTillDawn.Model.saveStuff.SaveData;
+import com.MinutesTillDawn.View.EndScreen;
 import com.MinutesTillDawn.View.MainMenu;
 import com.MinutesTillDawn.View.PauseMenu;
 import com.badlogic.gdx.Gdx;
@@ -47,7 +48,10 @@ public class PauseMenuController {
         view.giveUpButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Main.getMain().setScreen(new MainMenu(MainMenuController.getController(), GameAssetManager.getGameAssetManager().getSkin()));
+                GameController controller = view.game.getController();
+                Player player = controller.getPlayerController().getPlayer();
+                float survivalTime = GameSettings.gameTime * 60f - controller.timeRemaining;
+                Main.getMain().setScreen(new EndScreen(false, player, survivalTime));
             }
         });
         view.bwCheckbox.addListener(event -> {

@@ -8,10 +8,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -37,8 +37,32 @@ public class hintMenu implements Screen {
         Label keys = new Label("Keys:", skin);
         keys.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
         Label currentKeys = new Label(GameSettings.controlScheme, skin);
-        table.add(keys).padRight(60);
-        table.add(currentKeys).padLeft(60);
+        table.add(keys).padRight(60).padBottom(50);
+        table.add(currentKeys).padLeft(60).padBottom(50);
+        table.row();
+
+        Label label1= new Label(com.MinutesTillDawn.Model.Enums.Label.CHEATCODELABEL.getText(), skin);
+        label1.setColor(92f/255f,116f/255f,92f/255f, 1.0f);
+        label1.setFontScale(1.2f);
+        table.add(label1);
+        table.row();
+
+        Label lLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.LCHEAT.getText(), skin);
+        table.add(lLabel);
+        table.row();
+        Label rLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.RCHEAT.getText(), skin);
+        table.add(rLabel);
+        table.row();
+        Label hLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.HCHEAT.getText(), skin);
+        table.add(hLabel);
+        table.row();
+        Label bLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.BCHEAT.getText(), skin);
+        table.add(bLabel);
+        table.row();
+        Label cLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.CCHEAT.getText(), skin);
+        table.add(cLabel);
+
+        table.row();
     }
 
     @Override
@@ -83,5 +107,10 @@ public class hintMenu implements Screen {
     @Override
     public void dispose() {
 
+    }
+    private void setButton(TextButton button) {
+        button.setColor(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
+        button.getStyle().fontColor = Color.WHITE;
+        button.getStyle().overFontColor= new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f);
     }
 }

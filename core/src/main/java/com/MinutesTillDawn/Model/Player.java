@@ -28,6 +28,7 @@ public class Player {
     private Weapon weapon ;
     private float damageMultiplier = 1, speedMultiplier = 1;
     public int kills = 0;
+    public boolean isInvincible;
 
 
     private int xp = 0, level = 1;
@@ -202,5 +203,9 @@ public class Player {
 
     public void setKills(int kills){
         this.kills = kills;
+    }
+
+    public float getSpeedMultiplier() {
+        return speedMultiplier;
     }
 }

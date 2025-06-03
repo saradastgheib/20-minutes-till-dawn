@@ -103,4 +103,8 @@ public class UserDatabase {
     public Player getGuestPlayer() {
         return new Player(new User("Guest" + MathUtils.random(1000, 9999), null, GameAssetManager.getGameAssetManager().getRandomAvatarPath(), null, null), true);
     }
+
+    public void removeUser(User user) {
+        users.removeValue(user, true);
+    }
 }

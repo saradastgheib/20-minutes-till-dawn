@@ -110,7 +110,6 @@ public class LoginMenu implements Screen {
 
             Main.getBatch().begin();
             Main.getBatch().end();
-
             stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
             stage.draw();
         }

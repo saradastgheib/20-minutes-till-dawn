@@ -48,10 +48,9 @@ public class Scoreboard implements Screen {
             Label title = new Label("Top 10 Players", skin);
             title.setFontScale(2f);
             title.setColor(92f / 255f, 116f/255f, 92f/255f, 1);
-            System.out.println("meow");
             table.add(title).colspan(4).padBottom(50).row();
-            System.out.println("meow1");
-            // Header
+
+
             table.add(new Label("Username" , skin)).pad(10);
             table.add(new Label("Score", skin)).pad(10);
             table.add(new Label("Kills", skin)).pad(10);

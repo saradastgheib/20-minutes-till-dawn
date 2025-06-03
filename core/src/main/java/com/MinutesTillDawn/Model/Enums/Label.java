@@ -46,7 +46,13 @@ public enum Label {
     ARROWS("Arrows", "Flèches"),
     LANGUAGE("english", "spanish"),
     CHANGEUSERNAME("change username", "changer de nom d'utilisateur"),
-    ENTERNEWUSERNAME("enter your new username", "entrez votre nouveau nom d'utilisateur")
+    ENTERNEWUSERNAME("enter your new username", "entrez votre nouveau nom d'utilisateur"),
+    KILLSCOUNT("kills count: ", "nombre de victimes: "),
+    LEVEL("level: ", "niveau: "),
+    CHANGEPASSWORD("change password", "changer le mot de passe"),
+    DELETEACCOUNT("delete account", "supprimer le compte"),
+    WIN("YOU WON", "VOUS AVEZ GAGNÉ"),
+    DEAD("YOU DIED", "VOUS ÊTES MORT")
     ;
 
 

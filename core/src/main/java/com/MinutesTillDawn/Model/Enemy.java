@@ -1,11 +1,14 @@
 package com.MinutesTillDawn.Model;
 
+import com.MinutesTillDawn.Controller.GameController;
 import com.MinutesTillDawn.Model.Enums.EnemyType;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+
+
 
 
 public class Enemy {
@@ -64,5 +67,28 @@ public class Enemy {
     public void die() {
         state = EnemyState.DYING;
         deathTime = 0f;
+
     }
+
+    public boolean checkCollisionWithPlayer(Player player) {
+        return enemySprite.getBoundingRectangle().overlaps(player.getPlayerSprite().getBoundingRectangle());
+    }
+    public void takeDamage(int dmg) {
+        hp -= dmg;
+        if (hp <= 0) {
+            die();
+        }
+    }
+
+    public void update(float v, GameController controller) {
+        if (type!=EnemyType.TREE){
+            Player player = controller.getPlayerController().getPlayer();
+            Vector2 target = new Vector2(player.getPosX(), player.getPosY());
+            Vector2 direction = target.sub(getX(), getY()).nor();
+            float speed = 25;
+            setPosition(getX() + direction.x * speed * v, getY() + direction.y * speed * v);
+        }
+
+    }
+
 }

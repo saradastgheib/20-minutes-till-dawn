@@ -1,11 +1,9 @@
 package com.MinutesTillDawn.Controller;
 
 import com.MinutesTillDawn.Main;
-import com.MinutesTillDawn.Model.Enemy;
-import com.MinutesTillDawn.Model.EnemyState;
+import com.MinutesTillDawn.Model.*;
 import com.MinutesTillDawn.Model.Enums.EnemyType;
-import com.MinutesTillDawn.Model.GameAssetManager;
-import com.MinutesTillDawn.Model.GameSettings;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,6 +17,7 @@ public class EnemyController {
     private float tentacleTimer = 0f;
     private float eyebatTimer = 0f;
     GameController controller;
+    List<Seed> seeds = new ArrayList<>();
     EnemyController(GameController controller) {
         this.controller = controller;
     }
@@ -28,28 +27,48 @@ public class EnemyController {
         spawnEyeBat(v);
         List<Enemy> enemiesToRemove = new ArrayList<>();
         for (Enemy enemy : controller.enemies) {
+            Random random = new Random();
+           // if (random.nextInt() % 10 == 3) enemy.state = EnemyState.DYING;
             if (enemy.state == EnemyState.DYING) {
                 enemy.deathTime += v;
                 enemy.region = enemy.deathAnimation.getKeyFrame(getGameTime());
                 if (enemy.deathAnimation.isAnimationFinished(enemy.deathTime)) {
+                    controller.getPlayerController().player.kills ++;
                    enemy.state = EnemyState.DEAD;
                    enemiesToRemove.add(enemy);
+                   String path = "monsters/" + enemy.getType() + "/seed.png";
+                    seeds.add(new Seed(enemy.getX(), enemy.getY(), new Texture(Gdx.files.internal(path))));
                 }
             }
             else {
                 Animation<TextureRegion> animation = GameAssetManager.getGameAssetManager().getEnemyAnimation(enemy.getType());
                 enemy.region = animation.getKeyFrame(getGameTime());
             }
+            enemy.update(v, controller);
         }
         for (Enemy enemy : enemiesToRemove) {
             controller.enemies.remove(enemy);
         }
+        for (Seed seed : seeds) {
+            if (!seed.isCollected() && seed.checkCollisionWithPlayer(controller.getPlayerController().player)) {
+                seed.collect();
+                controller.getPlayerController().player.addXP(3);
+            }
+        }
+
     }
     public void render() {
 
         for (Enemy enemy : controller.enemies) {
             enemy.getEnemySprite().setRegion(enemy.region);
             enemy.getEnemySprite().draw(Main.getBatch());
+            if (enemy.checkCollisionWithPlayer(controller.getPlayerController().player) && !controller.getPlayerController().player.isInvincible) {
+                controller.getPlayerController().player.adjustHP(-1);
+                controller.makeInvincible();
+            }
+        }
+        for (Seed seed : seeds) {
+            seed.render();
         }
 
     }

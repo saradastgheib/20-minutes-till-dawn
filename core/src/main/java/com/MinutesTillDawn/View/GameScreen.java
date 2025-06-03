@@ -193,24 +193,25 @@ public class GameScreen  implements Screen, InputProcessor {
                 controller.timeRemaining = 0;
 
                 ScoreController.getController().addScore(new ScoreEntry(player.getUsername(), player.getTotalPoints(), player.kills, GameSettings.gameTime));
-                Main.getMain().setScreen(MainMenu.getMainMenu());
-                //endGame(true)
+                Main.getMain().setScreen(new EndScreen(true, player, (GameSettings.gameTime * 60f- controller.timeRemaining)));
+                System.out.println("time death");
             }
             if (player.getHealthPoints() <= 0) {
-                //endGame(false);
                 ScoreController.getController().addScore(new ScoreEntry(player.getUsername(), player.getTotalPoints(), player.kills, GameSettings.gameTime * 60f - controller.timeRemaining));
-
+                Main.getMain().setScreen(new EndScreen(false, player, GameSettings.gameTime * 60f- controller.timeRemaining));
+                System.out.println("hp death");
             }
 
             controller.updateGame(v);
+            controller.checkBulletEnemyCollisions(bullets);
             Main.getBatch().begin();
             player.updateAbilities(v);
             player.getWeapon().update(v);
             controller.renderGame();
 
             Main.getBatch().end();
-            levelLabel.setText("level: " + player.getLevel());
-            killLabel.setText("kills: " + player.kills);
+            levelLabel.setText(com.MinutesTillDawn.Model.Enums.Label.LEVEL.getText() + player.getLevel());
+            killLabel.setText(com.MinutesTillDawn.Model.Enums.Label.KILLSCOUNT.getText() + player.kills);
             stage.draw();
             for (Bullet b : bullets) {
                 b.update(v);

@@ -22,7 +22,7 @@ public class Weapon {
         setWeapon();
         weaponTexture = new Texture("weapons/" + name +"/still.png");
         weaponSprite = new Sprite(weaponTexture);
-        weaponSprite.setX((float) Gdx.graphics.getWidth() / 2 );
+        weaponSprite.setX((float) Gdx.graphics.getWidth() / 2);
         weaponSprite.setY((float) Gdx.graphics.getHeight() / 2);
         weaponSprite.setSize(50,50);
     }

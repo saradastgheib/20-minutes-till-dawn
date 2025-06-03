@@ -43,6 +43,7 @@ public class Main extends Game {
             GameSettings.getCurrentMusic().setLooping(true);
             GameSettings.getCurrentMusic().play();
             main.setScreen(new LoginMenu(LoginMenuController.getController(), GameAssetManager.getGameAssetManager().getSkin()));
+          //main.setScreen(new EndScreen(true, UserDatabase.getDatabase().getCurrentUser()));
         }
         catch (Exception e) {
             System.err.println(e.getMessage());

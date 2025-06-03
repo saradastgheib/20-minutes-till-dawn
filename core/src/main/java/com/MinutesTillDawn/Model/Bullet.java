@@ -1,47 +1,8 @@
-package com.MinutesTillDawn.Model;//package com.MinutesTillDawn.Model;
-//
-//import com.badlogic.gdx.Gdx;
-//import com.badlogic.gdx.graphics.Texture;
-//import com.badlogic.gdx.graphics.g2d.Sprite;
-//
-//public class Bullet {
-//    private Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
-//    private Sprite sprite = new Sprite(texture);
-//    private int damage = 5;
-//    private int x;
-//    private int y;
-//
-//    public Bullet(int x, int y){
-//        sprite.setSize(20 , 20);
-//        this.x = x;
-//        this.y = y;
-//        sprite.setX((float) Gdx.graphics.getWidth() / 2);
-//        sprite.setY((float) Gdx.graphics.getHeight() / 2);
-//    }
-//
-//    public Texture getTexture() {
-//        return texture;
-//    }
-//
-//    public Sprite getSprite() {
-//        return sprite;
-//    }
-//
-//    public int getDamage() {
-//        return damage;
-//    }
-//
-//    public int getX() {
-//        return x;
-//    }
-//
-//    public int getY() {
-//        return y;
-//    }
-//}
+package com.MinutesTillDawn.Model;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bullet {
@@ -62,6 +23,9 @@ public class Bullet {
     public void draw(ShapeRenderer renderer) {
         renderer.setColor(Color.WHITE);
         renderer.circle(position.x, position.y, radius);
+    }
+    public Circle getBoundingCircle () {
+        return new Circle(position.x, position.y, radius);
     }
 }
 

@@ -52,19 +52,19 @@ public class PauseMenu implements Screen {
         table.row();
 
         Label lLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.LCHEAT.getText(), skin);
-        table.add(lLabel);
+        table.add(lLabel).center();
         table.row();
         Label rLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.RCHEAT.getText(), skin);
-        table.add(rLabel);
+        table.add(rLabel).center();
         table.row();
         Label hLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.HCHEAT.getText(), skin);
-        table.add(hLabel);
+        table.add(hLabel).center();
         table.row();
         Label bLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.BCHEAT.getText(), skin);
-        table.add(bLabel);
+        table.add(bLabel).center();
         table.row();
         Label cLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.CCHEAT.getText(), skin);
-        table.add(cLabel);
+        table.add(cLabel).center();
 
         table.row();
 

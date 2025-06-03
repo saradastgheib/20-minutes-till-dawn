@@ -32,7 +32,7 @@ public class PlayerController {
     }
     public void handlePlayerInput(float v) {
         float delta = Gdx.graphics.getDeltaTime();
-        float moveAmount = player.getSpeed() * delta * 3;
+        float moveAmount = player.getSpeed() * delta * 10 * player.getSpeedMultiplier();
 
         if (GameSettings.controlScheme.equals("ARROWS")) {
             if (Gdx.input.isKeyPressed(Input.Keys.UP)) player.setPosY(player.getPosY() + moveAmount);
@@ -46,6 +46,21 @@ public class PlayerController {
             if (Gdx.input.isKeyPressed(Input.Keys.S)) player.setPosY(player.getPosY() - moveAmount);
         }
     }
+
+    private boolean isPlayerMoving() {
+        if (GameSettings.controlScheme.equals("ARROWS")) {
+            return Gdx.input.isKeyPressed(Input.Keys.UP) ||
+                Gdx.input.isKeyPressed(Input.Keys.RIGHT) ||
+                Gdx.input.isKeyPressed(Input.Keys.LEFT) ||
+                Gdx.input.isKeyPressed(Input.Keys.DOWN);
+        } else {
+            return Gdx.input.isKeyPressed(Input.Keys.W) ||
+                Gdx.input.isKeyPressed(Input.Keys.A) ||
+                Gdx.input.isKeyPressed(Input.Keys.S) ||
+                Gdx.input.isKeyPressed(Input.Keys.D);
+        }
+    }
+
 
     public void idleAnimation() {
 
