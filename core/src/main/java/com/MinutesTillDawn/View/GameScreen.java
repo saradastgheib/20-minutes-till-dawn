@@ -32,7 +32,7 @@ public class GameScreen  implements Screen, InputProcessor {
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     Skin skin = GameAssetManager.getGameAssetManager().getSkin();
     Label levelLabel;
-    Label killLabel;
+    Label killLabel, timeLabel;
     public GameScreen(GameController controller, Skin skin) {
         this.controller = controller;
         controller.setView(this);
@@ -169,6 +169,17 @@ public class GameScreen  implements Screen, InputProcessor {
             killLabel.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
             killLabel.setFontScale(1.1f);
             stage.addActor(killLabel);
+            int minutes = GameSettings.gameTime;
+            timeLabel = new Label(minutes + " : " + "00" , skin);
+            timeLabel.setFontScale(1.5f);
+            timeLabel.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
+            timeLabel.pack();
+
+            float x = Gdx.graphics.getWidth() - timeLabel.getWidth() - 10;
+            float y = Gdx.graphics.getHeight() - timeLabel.getHeight() - 10;
+
+            timeLabel.setPosition(x, y);
+            stage.addActor(timeLabel);
         }
         catch (Exception e) {
             System.out.println("2" + e.getMessage());
@@ -212,6 +223,9 @@ public class GameScreen  implements Screen, InputProcessor {
             Main.getBatch().end();
             levelLabel.setText(com.MinutesTillDawn.Model.Enums.Label.LEVEL.getText() + player.getLevel());
             killLabel.setText(com.MinutesTillDawn.Model.Enums.Label.KILLSCOUNT.getText() + player.kills);
+            int minutes = (int) (controller.timeRemaining/60);
+            int seconds = (int) (controller.timeRemaining % 60);
+            timeLabel.setText(minutes + " : " + seconds);
             stage.draw();
             for (Bullet b : bullets) {
                 b.update(v);
