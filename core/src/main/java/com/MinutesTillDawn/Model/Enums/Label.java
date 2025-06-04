@@ -28,10 +28,10 @@ public enum Label {
     SAVEANDLEAVE("save and leave", "sauvegarder et partir"),
     CHEATCODELABEL("-CHEAT CODES-", "-CODES DE TRICHE-"),
     LCHEAT("-L- Upgrades level", "-L- Niveau de mise à niveau"),
-    RCHEAT("\t-R- Reduces 1 min", "-R- Réduit 1 min"),
-    HCHEAT("\t-H- Adds health", "\t-H- Ajoute de la santé"),
-    BCHEAT("\t-B- Boss fight", "\t-B- Combat de boss"),
-    CCHEAT("\t-C- Clears enemies", "\t-C- Élimine les ennemis"),
+    RCHEAT("-R- Reduces 1 min", "-R- Réduit 1 min"),
+    HCHEAT("-H- Adds health", "-H- Ajoute de la santé"),
+    BCHEAT("-B- Boss fight", "-B- Combat de boss"),
+    CCHEAT("-C- Clears enemies", "-C- Élimine les ennemis"),
     ABILITIESLABEL("-ABILITIES-", "-CAPACITÉS-"),
     BWDISPLAY("black and white display: ", "affichage noir et blanc :"),
     PLAY("PLAY", "JOUER"),
@@ -52,7 +52,8 @@ public enum Label {
     CHANGEPASSWORD("change password", "changer le mot de passe"),
     DELETEACCOUNT("delete account", "supprimer le compte"),
     WIN("YOU WON", "VOUS AVEZ GAGNÉ"),
-    DEAD("YOU DIED", "VOUS ÊTES MORT")
+    DEAD("YOU DIED", "VOUS ÊTES MORT"),
+    CHANGEAVATAR("change avatar", "changer d'avatar")
     ;
 
 

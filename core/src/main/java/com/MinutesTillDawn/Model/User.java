@@ -28,6 +28,10 @@ public class User {
         return characterName;
     }
 
+    public void setCharacterName(String characterName) {
+        this.characterName = characterName;
+    }
+
     public String getUsername () {
         return  username;
     }

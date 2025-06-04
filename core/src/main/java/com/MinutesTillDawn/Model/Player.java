@@ -14,7 +14,7 @@ public class Player {
     private Texture playerTexture;
     private Sprite playerSprite;
     public boolean isGuest;
-    private User user;
+    private final User user;
     private int healthPoints = 5; //TODO initialize this
     private float speed = 5;
     private float posX = 0, posY = 0;
