@@ -1,0 +1,1354 @@
+{
+username: Guest3146
+playerX: 607.47864
+playerY: 467.41626
+playerHP: 5
+timeRemaining: 139.32971
+enemies: [
+	{
+		x: -1988
+		y: -1175
+		type: tree
+		hp: 50
+	}
+	{
+		x: 818
+		y: 1775
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1502
+		y: 1042
+		type: tree
+		hp: 50
+	}
+	{
+		x: -431
+		y: -643
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1948
+		y: 299
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1536
+		y: -534
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1426
+		y: -1793
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1406
+		y: 640
+		type: tree
+		hp: 50
+	}
+	{
+		x: -187
+		y: -1832
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1831
+		y: -1329
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1181
+		y: -1292
+		type: tree
+		hp: 50
+	}
+	{
+		x: 785
+		y: 1496
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1278
+		y: -1065
+		type: tree
+		hp: 50
+	}
+	{
+		x: 226
+		y: 1481
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1731
+		y: 1361
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1279
+		y: -293
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1403
+		y: 1994
+		type: tree
+		hp: 50
+	}
+	{
+		x: -628
+		y: 546
+		type: tree
+		hp: 50
+	}
+	{
+		x: 27
+		y: -977
+		type: tree
+		hp: 50
+	}
+	{
+		x: -845
+		y: -395
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1615
+		y: 1233
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1614
+		y: 1618
+		type: tree
+		hp: 50
+	}
+	{
+		x: -233
+		y: -1523
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1685
+		y: 1397
+		type: tree
+		hp: 50
+	}
+	{
+		x: 706
+		y: -871
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1890
+		y: 860
+		type: tree
+		hp: 50
+	}
+	{
+		x: -578
+		y: 1711
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1514
+		y: 155
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1006
+		y: -1836
+		type: tree
+		hp: 50
+	}
+	{
+		x: -484
+		y: 96
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1327
+		y: -723
+		type: tree
+		hp: 50
+	}
+	{
+		x: -537
+		y: -1645
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1358
+		y: 778
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1684
+		y: 953
+		type: tree
+		hp: 50
+	}
+	{
+		x: -146
+		y: 908
+		type: tree
+		hp: 50
+	}
+	{
+		x: -447
+		y: 367
+		type: tree
+		hp: 50
+	}
+	{
+		x: -804
+		y: 126
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1935
+		y: -189
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1956
+		y: -509
+		type: tree
+		hp: 50
+	}
+	{
+		x: 674
+		y: 875
+		type: tree
+		hp: 50
+	}
+	{
+		x: 736
+		y: 624
+		type: tree
+		hp: 50
+	}
+	{
+		x: -230
+		y: -1430
+		type: tree
+		hp: 50
+	}
+	{
+		x: 965
+		y: 39
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1274
+		y: -1741
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1050
+		y: 1591
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1169
+		y: -768
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1510
+		y: 1482
+		type: tree
+		hp: 50
+	}
+	{
+		x: 711
+		y: 770
+		type: tree
+		hp: 50
+	}
+	{
+		x: -737
+		y: 982
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1511
+		y: -1028
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1970
+		y: 154.5209
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1970
+		y: 864.0465
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -50
+		y: 91.51947
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 454.11038
+		y: 1013.97375
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1940.0521
+		y: 773.72095
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 143.46223
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 830.0962
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 220.69687
+		y: 1013.97375
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: -98.01483
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 174.49008
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: 95.01492
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: 152.43271
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: 688.13745
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 709.9056
+		y: 1013.97375
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 923.1431
+		y: 1013.97375
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 837.7367
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1613.6301
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1415.0674
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 744.919
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: 745.5513
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1170.6694
+		y: 1013.97375
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1899.3215
+		y: -96.904594
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 986.67596
+		y: 1013.97375
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 868.5649
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 465.58453
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1461.1646
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1303.0151
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1796.6611
+		y: 1013.97375
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 952.2418
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: -20.582657
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1899.3215
+		y: 184.27365
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -120.67853
+		y: 74.30742
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 171.0029
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: 893.51636
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 294.8508
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1017.8681
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 482.8384
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 724.8779
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 251.93839
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1684.9158
+		y: -166.02628
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -120.67853
+		y: 122.9686
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 512.831
+		y: 1013.97375
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -2.7882843
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: 298.28784
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1562.2607
+		y: -166.02628
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -120.67853
+		y: 533.8821
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1899.3215
+		y: 527.24097
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 283.28827
+		y: 1013.97375
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -152.33966
+		y: 810.5169
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1867.6604
+		y: 747.91595
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -152.33966
+		y: 340.60815
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -189.22156
+		y: 557.06177
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1830.7784
+		y: 538.5228
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -189.22156
+		y: -13.790146
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1830.7784
+		y: 520.2468
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -189.22156
+		y: 441.90643
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -197.62115
+		y: 947.85504
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1721.1147
+		y: -115.78839
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -42.114754
+		y: 1064.2117
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1718.9031
+		y: -99.12909
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1790.9338
+		y: 703.4118
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 94.70886
+		y: -99.12909
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1.9934998
+		y: 1080.8708
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 552.0849
+		y: 1080.8708
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -241.87915
+		y: 404.20276
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1378.427
+		y: 1080.8708
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -287.0963
+		y: 845.895
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1732.9037
+		y: 114.004745
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 780.0796
+		y: 1080.8708
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -292.59503
+		y: 742.75854
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 759.6316
+		y: 1080.8708
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 161.4201
+		y: -99.12909
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1727.405
+		y: 751.9233
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 70.99722
+		y: 1080.8708
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 219.48114
+		y: -99.12909
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -299.44843
+		y: 407.49646
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1361.5476
+		y: -99.12909
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1720.5515
+		y: 995.6091
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -299.44843
+		y: 221.55753
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1159.904
+		y: -99.12909
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1720.5515
+		y: 35.037598
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -332.15137
+		y: 717.2126
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -332.15137
+		y: 135.48526
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1404.7767
+		y: 1080.8708
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1687.8486
+		y: 519.076
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1668.4633
+		y: 795.1068
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 720.52606
+		y: 1080.8708
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 607.20197
+		y: -99.12909
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 456.99255
+		y: 1080.8708
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 111.29022
+		y: -99.12909
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 110.0625
+		y: -99.12909
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -229.16843
+		y: -99.12909
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1642.2402
+		y: 521.4846
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1642.2402
+		y: 859.2527
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1642.2402
+		y: 901.8595
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -38.20215
+		y: 1061.2611
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 248.7981
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 540.40607
+		y: 1057.4163
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 209.66373
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1071.2319
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1202.4757
+		y: 1057.4163
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 710.44507
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 260.02386
+		y: 1057.4163
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 502.66486
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -161.17444
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -402.52136
+		y: 267.11298
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1617.4786
+		y: 411.04074
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1265.6558
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -402.52136
+		y: 22.43843
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1617.4786
+		y: 893.9984
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 313.245
+		y: -122.58374
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -282.88336
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1024.4688
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -402.52136
+		y: 295.83905
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 201.41425
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 87.189316
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 690.2457
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 335.9453
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -75.45349
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 432.06473
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -21.252106
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 416.23734
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 781.8053
+		y: 1057.4163
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 938.5264
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 687.06146
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1507.3988
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 500.1123
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 125.20984
+		y: 1057.4163
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 362.7127
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 554.2793
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -402.52136
+		y: 398.65668
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 417.59778
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 993.667
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1617.4786
+		y: 795.3872
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 831.04956
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 490.37787
+		y: -122.58374
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -402.52136
+		y: 49.808357
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 718.579
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -402.52136
+		y: 388.1228
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: -402.52136
+		y: 55.93216
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -3.4072266
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 505.02875
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: -33.85893
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 329.58978
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -303.62888
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 62.151764
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1501.3992
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 648.2089
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 146.4993
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 825.6022
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 59.82344
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 664.8313
+		y: 1057.4163
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 51.696198
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 44.961517
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1617.4786
+		y: 155.20294
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 129.06824
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1617.4786
+		y: 830.3931
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 739.61755
+		y: -122.58374
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 167.80542
+		y: -122.58374
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1617.4786
+		y: 553.72687
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 550.6766
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1410.4374
+		y: 1057.4163
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1617.4786
+		y: 299.33716
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 1617.4786
+		y: 339.87283
+		type: eyebat
+		hp: 50
+	}
+	{
+		x: 302.22247
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 633.22614
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: -57.487236
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 892.8063
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 983.57007
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1617.4786
+		y: 245.7268
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 186.18445
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 1110.7058
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: 971.5646
+		y: -122.58374
+		type: tentacle_monster
+		hp: 25
+	}
+	{
+		x: -402.52136
+		y: 72.679245
+		type: tentacle_monster
+		hp: 25
+	}
+]
+level: 1
+}
