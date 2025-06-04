@@ -1,0 +1,310 @@
+{
+username: Guest5786
+playerX: 927
+playerY: 505.5
+playerHP: 5
+timeRemaining: 298.70035
+enemies: [
+	{
+		x: 222
+		y: -151
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1360
+		y: 710
+		type: tree
+		hp: 50
+	}
+	{
+		x: 194
+		y: 335
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1741
+		y: 882
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1748
+		y: -867
+		type: tree
+		hp: 50
+	}
+	{
+		x: 172
+		y: 451
+		type: tree
+		hp: 50
+	}
+	{
+		x: -550
+		y: 604
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1914
+		y: -929
+		type: tree
+		hp: 50
+	}
+	{
+		x: 664
+		y: -88
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1441
+		y: 422
+		type: tree
+		hp: 50
+	}
+	{
+		x: 987
+		y: 1598
+		type: tree
+		hp: 50
+	}
+	{
+		x: -180
+		y: 856
+		type: tree
+		hp: 50
+	}
+	{
+		x: -209
+		y: -540
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1065
+		y: 1766
+		type: tree
+		hp: 50
+	}
+	{
+		x: 955
+		y: -1345
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1545
+		y: -1723
+		type: tree
+		hp: 50
+	}
+	{
+		x: 549
+		y: -636
+		type: tree
+		hp: 50
+	}
+	{
+		x: -824
+		y: 172
+		type: tree
+		hp: 50
+	}
+	{
+		x: -180
+		y: 1035
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1944
+		y: 1276
+		type: tree
+		hp: 50
+	}
+	{
+		x: -952
+		y: 499
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1745
+		y: -1016
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1154
+		y: -404
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1513
+		y: 404
+		type: tree
+		hp: 50
+	}
+	{
+		x: -538
+		y: -739
+		type: tree
+		hp: 50
+	}
+	{
+		x: -239
+		y: -843
+		type: tree
+		hp: 50
+	}
+	{
+		x: 798
+		y: 589
+		type: tree
+		hp: 50
+	}
+	{
+		x: -48
+		y: -1094
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1768
+		y: 206
+		type: tree
+		hp: 50
+	}
+	{
+		x: 224
+		y: 1785
+		type: tree
+		hp: 50
+	}
+	{
+		x: -196
+		y: 1651
+		type: tree
+		hp: 50
+	}
+	{
+		x: 796
+		y: 1583
+		type: tree
+		hp: 50
+	}
+	{
+		x: -700
+		y: 1206
+		type: tree
+		hp: 50
+	}
+	{
+		x: -258
+		y: -1498
+		type: tree
+		hp: 50
+	}
+	{
+		x: -23
+		y: -950
+		type: tree
+		hp: 50
+	}
+	{
+		x: -380
+		y: -1004
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1839
+		y: -1200
+		type: tree
+		hp: 50
+	}
+	{
+		x: -973
+		y: -1117
+		type: tree
+		hp: 50
+	}
+	{
+		x: -996
+		y: 1460
+		type: tree
+		hp: 50
+	}
+	{
+		x: 676
+		y: -391
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1031
+		y: -524
+		type: tree
+		hp: 50
+	}
+	{
+		x: -750
+		y: 710
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1329
+		y: -89
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1751
+		y: -968
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1144
+		y: -310
+		type: tree
+		hp: 50
+	}
+	{
+		x: 190
+		y: -1044
+		type: tree
+		hp: 50
+	}
+	{
+		x: 533
+		y: 313
+		type: tree
+		hp: 50
+	}
+	{
+		x: 293
+		y: 268
+		type: tree
+		hp: 50
+	}
+	{
+		x: -1068
+		y: -301
+		type: tree
+		hp: 50
+	}
+	{
+		x: 1339
+		y: 1225
+		type: tree
+		hp: 50
+	}
+]
+level: 1
+}
