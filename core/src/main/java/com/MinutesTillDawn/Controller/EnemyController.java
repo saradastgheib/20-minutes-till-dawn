@@ -16,8 +16,10 @@ public class EnemyController {
 
     private float tentacleTimer = 0f;
     private float eyebatTimer = 0f;
+    private float shootTimer = 0f;
     GameController controller;
     List<Seed> seeds = new ArrayList<>();
+    public boolean frozen = false;
     EnemyController(GameController controller) {
         this.controller = controller;
     }
@@ -44,7 +46,7 @@ public class EnemyController {
                 Animation<TextureRegion> animation = GameAssetManager.getGameAssetManager().getEnemyAnimation(enemy.getType());
                 enemy.region = animation.getKeyFrame(getGameTime());
             }
-            enemy.update(v, controller);
+            if (!frozen) enemy.update(v, controller);
         }
         for (Enemy enemy : enemiesToRemove) {
             controller.enemies.remove(enemy);
@@ -63,8 +65,10 @@ public class EnemyController {
             enemy.getEnemySprite().setRegion(enemy.region);
             enemy.getEnemySprite().draw(Main.getBatch());
             if (enemy.checkCollisionWithPlayer(controller.getPlayerController().player) && !controller.getPlayerController().player.isInvincible) {
-                controller.getPlayerController().player.adjustHP(-1);
-                controller.makeInvincible();
+                if (enemy.type!= EnemyType.TREE){
+                    controller.getPlayerController().player.adjustHP(-1);
+                    controller.makeInvincible();
+                }
             }
         }
         for (Seed seed : seeds) {

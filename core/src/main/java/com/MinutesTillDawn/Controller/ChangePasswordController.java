@@ -23,6 +23,10 @@ public class ChangePasswordController {
                 if (user == null ) {
                     view.error.setText("something went wrong");
                 }
+                else if (!UserDatabase.getDatabase().passwordIsStrong(newPassword)) {
+                    view.error.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
+                    view.error.setText("weak password!");
+                }
                 else {
                     UserDatabase.getDatabase().updatePassword(user, newPassword);
                     view.error.setColor(92f / 255f, 116f/255f, 92f/255f, 1);

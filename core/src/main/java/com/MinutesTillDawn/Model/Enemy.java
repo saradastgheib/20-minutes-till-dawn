@@ -18,7 +18,7 @@ public class Enemy {
     public TextureRegion region;
     private float posX = 950, posY = 500;
     private int hp;
-    private final EnemyType type;
+    public final EnemyType type;
     public float deathTime = 0f;
     public Animation<TextureRegion> deathAnimation;
 
@@ -90,5 +90,6 @@ public class Enemy {
         }
 
     }
+
 
 }

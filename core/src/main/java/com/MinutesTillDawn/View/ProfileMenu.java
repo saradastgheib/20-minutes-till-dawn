@@ -25,12 +25,14 @@ public class ProfileMenu implements Screen {
     private Stage stage;
     private ProfileController controller = new ProfileController();
     Skin skin = GameAssetManager.getGameAssetManager().getSkin();
-    public TextButton changeUsername, changePassword, deleteAccountButton;
+    public TextButton changeUsername, changePassword, deleteAccountButton, changeAvatar, back;
 
     public ProfileMenu() {
         changePassword = new TextButton(Label.CHANGEPASSWORD.getText(), skin);
         changeUsername = new TextButton(Label.CHANGEUSERNAME.getText(), skin);
         deleteAccountButton = new TextButton(Label.DELETEACCOUNT.getText(), skin);
+        changeAvatar = new TextButton(Label.CHANGEAVATAR.getText(), skin);
+        back = new TextButton(Label.BACK.getText(), skin);
         controller.setView(this);
     }
 
@@ -89,6 +91,13 @@ public class ProfileMenu implements Screen {
 
 
             });
+            table.row();
+            setButton(changeAvatar);
+            table.add(changeAvatar).padBottom(50);
+
+            table.row();
+            setButton(back);
+            table.add(back).padBottom(50);
         }
        catch (Exception e) {
            System.out.println(e.getMessage());

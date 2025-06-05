@@ -23,7 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import java.util.Random;
 
 public class GameScreen  implements Screen, InputProcessor {
     private Stage stage;
@@ -31,8 +30,8 @@ public class GameScreen  implements Screen, InputProcessor {
     private final Array<Bullet> bullets = new Array<>();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     Skin skin = GameAssetManager.getGameAssetManager().getSkin();
-    Label levelLabel;
-    Label killLabel, timeLabel;
+    Label levelLabel, hpLabel;
+    Label killLabel, timeLabel, ammoLabel;
     public GameScreen(GameController controller, Skin skin) {
         this.controller = controller;
         controller.setView(this);
@@ -77,7 +76,8 @@ public class GameScreen  implements Screen, InputProcessor {
                 //bossFight();
                 break;
             case Input.Keys.F:
-                //freezeEnemies();
+                controller.getEnemyController().frozen = !controller.getEnemyController().frozen;
+                System.out.println("frozen : " + controller.getEnemyController().frozen);
                 break;
             case Input.Keys.P:
                 Main.getMain().setScreen(new PauseMenu(this));
@@ -107,7 +107,7 @@ public class GameScreen  implements Screen, InputProcessor {
     public boolean touchDown(int i, int i1, int i2, int i3) {
         if (i3 == Input.Buttons.LEFT) {
             Vector3 mouse = new Vector3(i, i1, 0);
-            stage.getViewport().unproject(mouse);
+            controller.getWorldController().getCamera().unproject(mouse);
 
             Player player = controller.getPlayerController().getPlayer();
             Sprite playerSprite = player.getPlayerSprite();
@@ -180,6 +180,17 @@ public class GameScreen  implements Screen, InputProcessor {
 
             timeLabel.setPosition(x, y);
             stage.addActor(timeLabel);
+            int ammo = controller.getPlayerController().getPlayer().getWeapon().getAmmo();
+            ammoLabel = new Label("ammo : " + ammo, skin);
+            ammoLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 70);
+            ammoLabel.setFontScale(1.1f);
+            stage.addActor(ammoLabel);
+
+            int hp = controller.getPlayerController().getPlayer().getHealthPoints();
+            hpLabel = new Label("hp : " + hp, skin);
+            hpLabel.setPosition(10, Gdx.graphics.getHeight() - levelLabel.getHeight() - 100);
+            hpLabel.setFontScale(1.1f);
+            stage.addActor(hpLabel);
         }
         catch (Exception e) {
             System.out.println("2" + e.getMessage());
@@ -222,10 +233,21 @@ public class GameScreen  implements Screen, InputProcessor {
 
             Main.getBatch().end();
             levelLabel.setText(com.MinutesTillDawn.Model.Enums.Label.LEVEL.getText() + player.getLevel());
+            levelLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 10);
             killLabel.setText(com.MinutesTillDawn.Model.Enums.Label.KILLSCOUNT.getText() + player.kills);
+            killLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 40);
             int minutes = (int) (controller.timeRemaining/60);
             int seconds = (int) (controller.timeRemaining % 60);
             timeLabel.setText(minutes + " : " + seconds);
+            float x = Gdx.graphics.getWidth() - timeLabel.getWidth() - 10;
+            float y = Gdx.graphics.getHeight() - timeLabel.getHeight() - 10;
+
+            timeLabel.setPosition(x, y);
+            int ammo = player.getWeapon().getAmmo();
+            ammoLabel.setText("ammo : " + ammo);
+            ammoLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 70);
+            hpLabel.setText("hp : " + player.getHealthPoints());
+            hpLabel.setPosition(10, Gdx.graphics.getHeight() - levelLabel.getHeight() - 100);
             stage.draw();
             for (Bullet b : bullets) {
                 b.update(v);

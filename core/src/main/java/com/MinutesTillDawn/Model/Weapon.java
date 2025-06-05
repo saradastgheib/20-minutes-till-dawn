@@ -81,7 +81,7 @@ public class Weapon {
     }
 
     public boolean canShoot() {
-        return !isReloading && ammo > projectile;
+        return !isReloading && ammo >= projectile;
     }
 
     public void shoot() {
