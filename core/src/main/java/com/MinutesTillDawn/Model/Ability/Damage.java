@@ -25,4 +25,8 @@ public class Damage extends Ability{
             }
         }
     }
+    @Override
+    public String getName() {
+        return "damage";
+    }
 }

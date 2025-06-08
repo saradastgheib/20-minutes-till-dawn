@@ -40,12 +40,25 @@ public class EndScreen implements Screen {
         Skin skin = GameAssetManager.getGameAssetManager().getSkin();
 
         Label winStatus = new Label("", skin);
+        winStatus.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         if (won) winStatus.setText(com.MinutesTillDawn.Model.Enums.Label.WIN.getText());
         else winStatus.setText(com.MinutesTillDawn.Model.Enums.Label.DEAD.getText());
         winStatus.setFontScale(6f);
         table.add(winStatus).padBottom(50);
         table.row();
 
+        int survivalMins = (int) (timeSurvived/60);
+        int survivalSecs = (int) (timeSurvived % 60);
+        Label survivalTime = new Label(com.MinutesTillDawn.Model.Enums.Label.SURVIVALTIME.getText() + "  " + survivalMins + " : " + survivalSecs, skin);
+        survivalTime.setFontScale(1.5f);
+        survivalTime.setColor(92f / 255f, 116f/255f, 92f/255f, 1);
+        table.add(survivalTime);
+        table.row();
+        Label username = new Label(player.getUsername(), skin);
+        username.setFontScale(1.5f);
+        username.setColor(92f / 255f, 116f/255f, 92f/255f, 1);
+        table.add(username);
+        table.row();
         int kills = player.kills;
         Label killsCount = new Label(com.MinutesTillDawn.Model.Enums.Label.KILLSCOUNT.getText() + kills, skin);
         killsCount.setFontScale(1.5f);

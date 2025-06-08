@@ -44,7 +44,7 @@ public enum Label {
     CONTROLLERSLABEL("keyboard controllers: ", "contrôleurs de clavier: "),
     CHOOSELABEL("choose your controllers", "choisissez vos contrôleurs"),
     ARROWS("Arrows", "Flèches"),
-    LANGUAGE("english", "spanish"),
+    LANGUAGE("english", "french"),
     CHANGEUSERNAME("change username", "changer de nom d'utilisateur"),
     ENTERNEWUSERNAME("enter your new username", "entrez votre nouveau nom d'utilisateur"),
     KILLSCOUNT("kills count: ", "nombre de victimes: "),
@@ -53,7 +53,8 @@ public enum Label {
     DELETEACCOUNT("delete account", "supprimer le compte"),
     WIN("YOU WON", "VOUS AVEZ GAGNÉ"),
     DEAD("YOU DIED", "VOUS ÊTES MORT"),
-    CHANGEAVATAR("change avatar", "changer d'avatar")
+    CHANGEAVATAR("change avatar", "changer d'avatar"),
+    SURVIVALTIME("survival time", "temps de survie")
     ;
 
 
@@ -61,7 +62,8 @@ public enum Label {
 
 
 
-    private String englishText, frenchText;
+    private final String englishText;
+    private final String frenchText;
     Label(String english, String french) {
         this.englishText = english;
         this.frenchText = french;

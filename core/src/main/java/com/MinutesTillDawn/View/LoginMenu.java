@@ -58,7 +58,8 @@ public class LoginMenu implements Screen {
             table.center();
             stage.addActor(table);
             Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.LOGINLABEL.getText(), skin);
-            title.setFontScale(1.2f);
+            title.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
+            title.setFontScale(1.3f);
             TextField.TextFieldStyle style = usernameField.getStyle();
 
             style.fontColor = Color.WHITE;
@@ -79,11 +80,13 @@ public class LoginMenu implements Screen {
             table.add(title).colspan(2).padBottom(20).padBottom(15).row();
             Label label = new Label(com.MinutesTillDawn.Model.Enums.Label.USERNAMEFIELD.getText(), skin);
             label.setColor(new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f));
+            label.setFontScale(1.1f);
             table.add(label).right().padRight(10).padBottom(15);
             table.add(usernameField).width(200).padBottom(15).row();
 
             Label label1 = new Label(com.MinutesTillDawn.Model.Enums.Label.PASSWORDFIELD.getText(), skin);
             label1.setColor(new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f));
+            label1.setFontScale(1.1f);
             table.add(label1).right().padRight(10).padBottom(15);
             table.add(passwordField).width(200).padBottom(15).row();
             table.add(loginButton).padTop(10).padBottom(15);

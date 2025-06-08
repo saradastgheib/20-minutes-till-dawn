@@ -15,5 +15,9 @@ public class Vitality extends Ability {
     public void update(Player player, float v) {
 
     }
+    @Override
+    public String getName() {
+        return "vitality";
+    }
 
 }

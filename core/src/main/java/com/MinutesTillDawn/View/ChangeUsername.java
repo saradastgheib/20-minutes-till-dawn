@@ -40,6 +40,7 @@ public class ChangeUsername implements Screen {
         table.center();
         stage.addActor(table);
         Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.CHANGEUSERNAME.getText(), skin);
+        title.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         title.setFontScale(1.2f);
         usernameField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERNEWUSERNAME.getText());
         error.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);

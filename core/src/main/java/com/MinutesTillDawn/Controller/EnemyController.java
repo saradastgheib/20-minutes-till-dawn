@@ -54,7 +54,7 @@ public class EnemyController {
         for (Seed seed : seeds) {
             if (!seed.isCollected() && seed.checkCollisionWithPlayer(controller.getPlayerController().player)) {
                 seed.collect();
-                controller.getPlayerController().player.addXP(3);
+                controller.getPlayerController().player.addXP(3, controller.getView());
             }
         }
 

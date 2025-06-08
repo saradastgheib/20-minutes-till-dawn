@@ -14,4 +14,8 @@ public class Pocrease extends Ability{
     public void update(Player player, float v) {
 
     }
+    @Override
+    public String getName() {
+        return "procrease";
+    }
 }

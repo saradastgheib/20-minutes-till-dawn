@@ -106,6 +106,7 @@ public class ChangeAvatar implements Screen {
         table.add(largePreview).padLeft(10).right();
         Table rightSide = new Table();
         characterName.setFontScale(3f);
+        characterName.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         characterName.setText(UserDatabase.getDatabase().getCurrentUser().getCharacterName());
         rightSide.add(characterName).left().padRight(100);
         rightSide.add(largePreview).size(405, 470).padRight(60).padTop(30);

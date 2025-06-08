@@ -40,6 +40,10 @@ public class GameController {
         enemyController = new EnemyController(this);
     }
 
+    public GameScreen getView() {
+        return view;
+    }
+
     public void updateGame(float v) {
         if (view != null) {
             if (aimAutoEnabled) {
@@ -75,7 +79,7 @@ public class GameController {
 
     public void renderGame() {
         worldController.update();
-       playerController.render();
+        playerController.render();
         weaponController.render();
         enemyController.render();
         Sprite cursor = GameAssetManager.getGameAssetManager().getCursor();

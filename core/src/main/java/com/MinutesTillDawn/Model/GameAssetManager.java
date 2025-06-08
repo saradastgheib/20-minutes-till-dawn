@@ -1,15 +1,19 @@
 package com.MinutesTillDawn.Model;
 
+import com.MinutesTillDawn.Model.Ability.*;
 import com.MinutesTillDawn.Model.Enums.EnemyType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
@@ -25,6 +29,8 @@ public class GameAssetManager {
     private final  Array<TextureRegion> tiles = new Array<>();
     private final Sprite Cursor = new Sprite(new Texture("cursor.png"));
     private Animation<TextureRegion> enemyDeath;
+    BitmapFont customFont;
+    private final Array<String> abilities = new Array<>();
 
 
 
@@ -34,10 +40,43 @@ public class GameAssetManager {
         loadEnemyAnimation();
         loadDeathAnimation();
         initializeTiles();
-
+        initializeAbilities();
+        loadFont();
     }
 
+    private void initializeAbilities() {
+        abilities.add("amocrease");
+        abilities.add("damage");
+        abilities.add("procrease");
+        abilities.add("speedy");
+        abilities.add("vitality");
+    }
 
+    public Ability getRandomAbility () {
+        String ability = abilities.random();
+        Ability ability1 = null;
+        switch (ability) {
+            case "amocrease" :
+                ability1 =  new Amocrease();
+                break;
+            case "damage" :
+                ability1 =  new Damage();
+                break;
+
+            case "procrease" :
+                ability1 =  new Pocrease();
+                break;
+
+            case "speedy" :
+                ability1 =  new Speedy();
+                break;
+            case "vitality" :
+                ability1 =  new Vitality();
+                break;
+
+        }
+        return ability1;
+    }
     public void initializeTiles() {
         for (int i = 1; i <= 18; i++) {
             Texture texture = new Texture("tiles/forest" + i + ".png");
@@ -140,4 +179,19 @@ public class GameAssetManager {
         return Cursor;
     }
 
+    public void loadFont() {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/ChevyRay-Lantern.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 24;
+        parameter.color = Color.WHITE;
+        parameter.borderColor = Color.BLACK;
+        parameter.borderWidth = 1;
+
+        customFont = generator.generateFont(parameter);
+        generator.dispose();
+    }
+
+    public BitmapFont getCustomFont() {
+        return customFont;
+    }
 }

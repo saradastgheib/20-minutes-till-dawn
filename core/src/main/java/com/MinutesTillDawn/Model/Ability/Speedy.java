@@ -25,4 +25,8 @@ public class Speedy extends Ability{
             }
         }
     }
+    @Override
+    public String getName() {
+        return "speedy";
+    }
 }

@@ -1,6 +1,8 @@
 package com.MinutesTillDawn.Model;
 
 import com.MinutesTillDawn.Model.Ability.Ability;
+import com.MinutesTillDawn.Model.Enums.Hero;
+import com.MinutesTillDawn.View.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -55,6 +57,9 @@ public class Player {
         this.posY = screenCenterY;
         playerSprite.setPosition(screenCenterX, screenCenterY);
         playerSprite.setSize(playerTexture.getWidth()*4f, playerTexture.getHeight()*4f);
+        Hero hero = Hero.fromString(heroName);
+        healthPoints = hero.getHp();
+        speed = hero.getSpeed();
     }
     public String getAvatarPath() {
         return user.getAvatarPath();
@@ -126,17 +131,18 @@ public class Player {
         isPlayerRunning = playerRunning;
     }
 
-    public void addXP(int xp) {
+    public void addXP(int xp, GameScreen screen) {
         this.xp += xp;
 
         while (this.xp >= getXpNeeded()) {
             this.xp -= getXpNeeded();
-            upgradeLevel();
+            upgradeLevel(screen);
         }
     }
 
-    public  void upgradeLevel() {
+    public  void upgradeLevel(GameScreen screen) {
         level ++;
+        addAbility(GameAssetManager.getGameAssetManager().getRandomAbility(), screen);
     }
     public int getXpNeeded(){
         return  level * 20;
@@ -175,9 +181,10 @@ public class Player {
     public void setSpeedMultiplier(float speedMultiplier) {
         this.speedMultiplier = speedMultiplier;
     }
-    public void addAbility(Ability ability) {
+    public void addAbility(Ability ability, GameScreen screen) {
         retrievedAbilities.add(ability);
         ability.activate(this);
+        screen.notification = ability.getName() + " activated!";
     }
 
     public void updateAbilities(float delta) {
@@ -207,5 +214,9 @@ public class Player {
 
     public float getSpeedMultiplier() {
         return speedMultiplier;
+    }
+
+    public int getXp() {
+        return xp;
     }
 }

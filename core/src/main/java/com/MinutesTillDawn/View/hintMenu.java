@@ -37,6 +37,7 @@ public class hintMenu implements Screen {
 
         Skin skin = GameAssetManager.getGameAssetManager().getSkin();
         Label keys = new Label("Keys:", skin);
+        keys.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         keys.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
         Label currentKeys = new Label(GameSettings.controlScheme, skin);
         table.add(keys).padBottom(50);

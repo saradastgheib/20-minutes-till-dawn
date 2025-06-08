@@ -43,7 +43,7 @@ public class ChangePassword implements Screen {
         stage.addActor(table);
         Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.FORGOTYOURPASSWORD.getText(), skin);
         title.setFontScale(1.2f);
-
+        title.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         passwordField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURPASSWORD.getText());
         passwordField.setPasswordMode(true);
         passwordField.setPasswordCharacter('*');

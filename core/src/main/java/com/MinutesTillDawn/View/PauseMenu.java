@@ -46,6 +46,7 @@ public class PauseMenu implements Screen {
         table.add(resumeButton).pad(20);
         table.row();
         Label label1= new Label(com.MinutesTillDawn.Model.Enums.Label.CHEATCODELABEL.getText(), skin);
+        label1.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         label1.setColor(92f/255f,116f/255f,92f/255f,255f/255f);
         label1.setFontScale(1.2f);
         table.add(label1);
@@ -75,7 +76,7 @@ public class PauseMenu implements Screen {
 
         for (Ability ability : game.getController().getPlayerController().getPlayer().getRetrievedAbilities()) {
             table.row();
-            Label label = new Label(ability.toString().toLowerCase(), skin);
+            Label label = new Label(ability.getName(), skin);
             table.add(label);
         }
 

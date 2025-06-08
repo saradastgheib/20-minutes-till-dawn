@@ -42,7 +42,8 @@ public class MainMenu implements Screen {
         Texture avatarTexture = new Texture(Gdx.files.internal(UserDatabase.getDatabase().getCurrentUser().getAvatarPath()));
         avatarImage = new Image(avatarTexture);
         avatarImage.setScaling(Scaling.fit);
-        username = new Label(UserDatabase.getDatabase().getCurrentUser().getUsername() + "\t" + UserDatabase.getDatabase().getCurrentUser().getTotalPoints(), skin);
+        username = new Label(UserDatabase.getDatabase().getCurrentUser().getUsername() + "   " + UserDatabase.getDatabase().getCurrentUser().getTotalPoints(), skin);
+        username.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         changeMenuButton.setColor(new Color(13f/255f,18f/255f,37f/255f,255f/255f));
         changeMenuButton.getStyle().fontColor = Color.WHITE;
         changeMenuButton.getStyle().overFontColor= new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f);

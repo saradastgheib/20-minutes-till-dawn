@@ -10,4 +10,5 @@ public abstract class Ability {
     public boolean isActive() {
         return isActive;
     }
+    public abstract String getName ();
 }

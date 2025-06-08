@@ -56,7 +56,7 @@ public class RegisterMenu implements Screen {
 
         Label title = new Label(com.MinutesTillDawn.Model.Enums.Label.REISTERMENU.getText() +" menu", skin);
         title.setFontScale(1.2f);
-
+        title.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         usernameField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURUSERNAME.getText());
         passwordField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ENTERYOURPASSWORD.getText());
         passwordField.setPasswordMode(true);
@@ -72,7 +72,7 @@ public class RegisterMenu implements Screen {
             "What is your favorite food?",
             "What is your elementary school's name?"
         );
-        securityQuestionBox.setColor(13f/255f,18f/255f,37f/255f,255f/255f);
+        securityQuestionBox.setColor(13f/255f,18f/255f,37f/255f, 1.0f);
         securityQuestionBox.getStyle().fontColor = new Color(253f / 255f, 81f / 255f, 97f / 255f, 1f);
         securityQuestionField.setMessageText(com.MinutesTillDawn.Model.Enums.Label.ANSWERLABEL.getText());
 

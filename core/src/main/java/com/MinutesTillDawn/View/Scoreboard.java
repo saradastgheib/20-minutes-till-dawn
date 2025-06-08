@@ -46,6 +46,7 @@ public class Scoreboard implements Screen {
             Array<ScoreEntry> sortedScores = manager.getScoresSortedBy(manager.sortBy);
 
             Label title = new Label("Top 10 Players", skin);
+            title.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
             title.setFontScale(2f);
             title.setColor(92f / 255f, 116f/255f, 92f/255f, 1);
             table.add(title).colspan(4).padBottom(50).row();

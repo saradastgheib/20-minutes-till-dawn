@@ -12,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -30,8 +32,11 @@ public class GameScreen  implements Screen, InputProcessor {
     private final Array<Bullet> bullets = new Array<>();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     Skin skin = GameAssetManager.getGameAssetManager().getSkin();
-    Label levelLabel, hpLabel;
+    Label levelLabel, hpLabel, notifLabel;
     Label killLabel, timeLabel, ammoLabel;
+    ProgressBar xpBar;
+    public String notification = "";
+
     public GameScreen(GameController controller, Skin skin) {
         this.controller = controller;
         controller.setView(this);
@@ -61,7 +66,7 @@ public class GameScreen  implements Screen, InputProcessor {
     public boolean keyDown(int i) {
         switch (i) {
             case Input.Keys.L:
-                controller.getPlayerController().getPlayer().upgradeLevel();
+                controller.getPlayerController().getPlayer().upgradeLevel(this);
                 break;
             case Input.Keys.T:
                 controller.timeRemaining -= 60;
@@ -73,7 +78,7 @@ public class GameScreen  implements Screen, InputProcessor {
                 }
                 break;
             case Input.Keys.B:
-                //bossFight();
+                controller.timeRemaining = GameSettings.gameTime*20f;
                 break;
             case Input.Keys.F:
                 controller.getEnemyController().frozen = !controller.getEnemyController().frozen;
@@ -160,6 +165,7 @@ public class GameScreen  implements Screen, InputProcessor {
             Gdx.input.setInputProcessor(this);
             Gdx.input.setCursorCatched(true);
             levelLabel = new Label("level: 1", skin);
+            levelLabel.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
             levelLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 10);
             levelLabel.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
             levelLabel.setFontScale(1.1f);
@@ -174,12 +180,27 @@ public class GameScreen  implements Screen, InputProcessor {
             timeLabel.setFontScale(1.5f);
             timeLabel.setColor(253f / 255f, 81f / 255f, 97f / 255f, 1f);
             timeLabel.pack();
-
+            notifLabel = new Label(notification, skin);
+            notifLabel.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
+            notifLabel.setPosition(500, Gdx.graphics.getHeight()- notifLabel.getHeight() - 10);
+            stage.addActor(notifLabel);
             float x = Gdx.graphics.getWidth() - timeLabel.getWidth() - 10;
             float y = Gdx.graphics.getHeight() - timeLabel.getHeight() - 10;
 
             timeLabel.setPosition(x, y);
             stage.addActor(timeLabel);
+
+            ProgressBar.ProgressBarStyle style = new ProgressBar.ProgressBarStyle();
+            style.background = skin.newDrawable("white",  new Color(0.2f, 0.2f, 0.2f, 1f));
+            style.knobBefore = skin.newDrawable("white", new Color(92f / 255f, 116f/255f, 92f/255f, 1));
+            style.knob = skin.newDrawable("white", Color.CLEAR);
+            Player player = controller.getPlayerController().getPlayer();
+            xpBar = new ProgressBar(0, player.getXpNeeded(), 1, false, style);
+            xpBar.setWidth(300);
+            xpBar.setHeight(40);
+            xpBar.setValue(player.getXp());
+            xpBar.setPosition(10, 20);
+            stage.addActor(xpBar);
             int ammo = controller.getPlayerController().getPlayer().getWeapon().getAmmo();
             ammoLabel = new Label("ammo : " + ammo, skin);
             ammoLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 70);
@@ -214,7 +235,7 @@ public class GameScreen  implements Screen, InputProcessor {
             } else {
                 controller.timeRemaining = 0;
 
-                ScoreController.getController().addScore(new ScoreEntry(player.getUsername(), player.getTotalPoints(), player.kills, GameSettings.gameTime));
+                ScoreController.getController().addScore(new ScoreEntry(player.getUsername(), (int) (player.kills*GameSettings.gameTime*60f), player.kills, GameSettings.gameTime*60f));
                 Main.getMain().setScreen(new EndScreen(true, player, (GameSettings.gameTime * 60f- controller.timeRemaining)));
                 System.out.println("time death");
             }
@@ -233,21 +254,15 @@ public class GameScreen  implements Screen, InputProcessor {
 
             Main.getBatch().end();
             levelLabel.setText(com.MinutesTillDawn.Model.Enums.Label.LEVEL.getText() + player.getLevel());
-            levelLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 10);
             killLabel.setText(com.MinutesTillDawn.Model.Enums.Label.KILLSCOUNT.getText() + player.kills);
-            killLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 40);
+            notifLabel.setText(notification);
             int minutes = (int) (controller.timeRemaining/60);
             int seconds = (int) (controller.timeRemaining % 60);
             timeLabel.setText(minutes + " : " + seconds);
-            float x = Gdx.graphics.getWidth() - timeLabel.getWidth() - 10;
-            float y = Gdx.graphics.getHeight() - timeLabel.getHeight() - 10;
-
-            timeLabel.setPosition(x, y);
             int ammo = player.getWeapon().getAmmo();
             ammoLabel.setText("ammo : " + ammo);
-            ammoLabel.setPosition(10, Gdx.graphics.getHeight()- levelLabel.getHeight() - 70);
             hpLabel.setText("hp : " + player.getHealthPoints());
-            hpLabel.setPosition(10, Gdx.graphics.getHeight() - levelLabel.getHeight() - 100);
+            xpBar.setValue(player.getXp());
             stage.draw();
             for (Bullet b : bullets) {
                 b.update(v);

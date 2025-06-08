@@ -51,8 +51,10 @@ public class SettingsMenu implements Screen {
         title.setFontScale(2f);
         table.add(title).colspan(2).padBottom(30).center();
         table.row();
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = GameAssetManager.getGameAssetManager().getCustomFont();
         Label musicVolumeLabel = new Label(com.MinutesTillDawn.Model.Enums.Label.MUSICVOLUME.getText(), skin);
-
+        musicVolumeLabel.getStyle().font = GameAssetManager.getGameAssetManager().getCustomFont();
         musicVolumeSlider.setValue(GameSettings.getCurrentMusic().getVolume());
         table.add(musicVolumeLabel).left().padBottom(15);
         table.add(musicVolumeSlider).width(300).padBottom(15);
